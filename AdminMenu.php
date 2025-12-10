@@ -32,7 +32,7 @@ class AdminMenu extends InformationPage
                     $toast = $obj->getModel2()['Branches']['SuccessfullyChangeBranch'];
                     if($this->getSCRIPTFILENAME() === 'MyFlexTables' && !isset($this->getModel2()[$_GET['id']]))
                         header("Location: home.php");
-                    else if($this->getSCRIPTFILENAME() === 'SystemLang')
+                    else if($this->getSCRIPTFILENAME() === 'SystemLang' && !(isset($_GET['lang']) && isset($_GET['table']) && isset($obj->getModel()->getObj()[$_GET['lang']][$_GET['table']])))
                         header("Location: SystemLang.php");
                 }else{
                     include 'admin_title.php';
