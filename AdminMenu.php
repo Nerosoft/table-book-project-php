@@ -43,11 +43,11 @@ class AdminMenu extends InformationPage
                 $this->setErrors($obj->getModel2()[$this->getUrlName2()]['IdIsReq']);
             else if(
             isset($_POST['id']) && !isset($obj->getModel()->getBranch()[$_POST['id']]) && $this->getUrlName2() === 'Branches' ||
-            isset($_POST['id']) && $obj->getModel()->getId() === $_POST['id'] && $this->getUrlName2() === 'Branches'||
+            isset($_POST['id']) && $obj->getModel()->getId() === $_POST['id'] && $this->getUrlName2() === 'Branches' && isset($_POST['deleting'])||
             isset($_POST['id']) && !isset($obj->getModel2()['MyFlexTables'][$_POST['id']]) && $this->getUrlName2() === 'Home'||
             isset($_POST['id']) && isset($_GET['id']) && !isset($this->getModel()->getObj()[$_GET['id']][$_POST['id']]) && $this->getUrlName2() === 'MyFlexTables' ||
             isset($_POST['id']) && !isset($obj->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'ChangeLanguage'||
-            isset($_POST['id']) && $_POST['id'] === $this->getLanguage() && $this->getUrlName2() === 'ChangeLanguage')
+            isset($_POST['id']) && $_POST['id'] === $this->getLanguage() && $this->getUrlName2() === 'ChangeLanguage' && isset($_POST['deleting']))
                 $this->setErrors($obj->getModel2()[$this->getUrlName2()]['IdIsInv']);
             
             if($this->isEmptyErrors() && isset($_POST['deleting']))
