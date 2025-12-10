@@ -22,21 +22,31 @@ class AdminMenu extends InformationPage
     private $TabelEvent;
     function __construct($obj){
         parent::__construct($obj->getModel()->getObj()['Setting']['Language'], $obj);
-        include 'admin_title.php';
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['brancChange']))
             $this->showCustomeMessage(function()use($obj){
                 if(isset($obj->getModel()->getBranch()[$_POST['brancChange']]) || $_SESSION['staticId'] === $_POST['brancChange']){
                     $obj->getModel()->resetId();
+                    $this->setLanguage($obj->getModel()->getObj()['Setting']['Language']);
+                    $this->setTitle($obj->getModel2()[$this->getUrlName2()]['Title']);
+                    include 'admin_title.php';
                     $toast = $obj->getModel2()['Branches']['SuccessfullyChangeBranch'];
+                    if($this->getSCRIPTFILENAME() === 'MyFlexTables' && !isset($this->getModel2()[$_GET['id']]))
+                        header("Location: home.php");
+                    else if($this->getSCRIPTFILENAME() === 'SystemLang')
+                        header("Location: SystemLang.php");
                 }else{
+                    include 'admin_title.php';
                     $toast = $obj->getModel2()['Branches']['ErrorChangeBranch'];
                     $type = 'danger';
                 }
                 include 'toast_message.php';
             });
-        else if($_SERVER["REQUEST_METHOD"] === "POST" && $this->getUrlName2() === 'SystemLang')
+        else if($_SERVER["REQUEST_METHOD"] === "POST" && $this->getUrlName2() === 'SystemLang'){
+            include 'admin_title.php';
             $obj->isValid();
+        }
         else if($_SERVER["REQUEST_METHOD"] === "POST" ){
+            include 'admin_title.php';
             if(isset($_POST['id']) && $_POST['id'] === '' || 
             isset($_POST['deleting']) && !isset($_POST['id']) || 
             isset($_POST['change_language']) && !isset($_POST['id']))
@@ -66,11 +76,13 @@ class AdminMenu extends InformationPage
                         include 'toast_message.php'; 
                 }
             });
-        }else
+        }else{
+                include 'admin_title.php';
                 $this->showCustomeMessage(function($type = 'success')use($obj){
                     $toast = $obj->getModel2()[$this->getUrlName2()]['LoadMessage'];
                     include 'toast_message.php'; 
                 });  
+            }
                 $this->Ssearch = $obj->getModel2()['TableInfo']['Ssearch'];
                 $this->InfoEmpty = $obj->getModel2()['TableInfo']['InfoEmpty'];
                 $this->ZeroRecords = $obj->getModel2()['TableInfo']['ZeroRecords'];
