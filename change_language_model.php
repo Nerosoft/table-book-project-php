@@ -11,7 +11,7 @@ foreach ($view->getMyLanguage() as $key => $value)
             <div class="form-check">
             <input name="id" class="form-check-input flexCheck" value="{$key}" checked type="radio">
             <label  class="form-check-label">
-            {$value->getLanguage()}
+            {$value->getName()}
             </label>
             </div>
         HTML;
@@ -20,7 +20,7 @@ foreach ($view->getMyLanguage() as $key => $value)
             <div class="form-check">
             <input name="id" class="form-check-input" value="{$key}" type="radio">
             <label  class="form-check-label">
-            {$value->getLanguage()}
+            {$value->getName()}
             </label>
             </div>
         HTML;

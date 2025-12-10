@@ -4,7 +4,7 @@ if(isset($_SESSION['userId']))
     header("Location: home.php");
 else{
     require 'InformationPage.php';
-    require 'Language.php';
+    require 'MyLanguage.php';
     require 'Users.php';
     class LoginRegister extends InformationPage{
         private $TitleForm;
@@ -77,7 +77,7 @@ else{
             $this->HintEmail = $obj->getModel2()[$this->getUrlName2()]['HintEmail'];
             $this->LabelPassword = $obj->getModel2()[$this->getUrlName2()]['LabelPassword'];
             $this->HintPassword = $obj->getModel2()[$this->getUrlName2()]['HintPassword'];
-            $this->MyLanguage = Language::makeAllLanguage($obj->getModel2()['AllNamesLanguage']);
+            $this->MyLanguage = MyLanguage::fromArray($obj);
             $this->ButtonName = $obj->getModel2()[$this->getUrlName2()]['ButtonName'];
             $this->ChangeLanguageButton = $obj->getModel2()[$this->getUrlName2()]['ChangeLanguageButton'];
             $this->ModelTitle = $obj->getModel2()[$this->getUrlName2()]['ModelTitle'];
