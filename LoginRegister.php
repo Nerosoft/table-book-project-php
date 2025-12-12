@@ -5,7 +5,6 @@ if(isset($_SESSION['userId']))
 else{
     require 'InformationPage.php';
     require 'MyLanguage.php';
-    require 'Users.php';
     class LoginRegister extends InformationPage{
         private $TitleForm;
         private $LabelEmail;
