@@ -88,39 +88,39 @@ class Branches extends Page{
         //get all hint
     }
     function isValid(){
-        if(!isset($_POST['Name']) || isset($_POST['Name']) && $_POST['Name'] === '')
+        if(!isset($_POST['Name']) || $_POST['Name'] === '')
             $this->setErrors($this->getBranceRaysNameRequired());
         else if(strlen($_POST['Name']) < 3)
             $this->setErrors($this->getBranceRaysNameLength());
-        if(!isset($_POST['Phone']) || isset($_POST['Phone']) && $_POST['Phone'] === '')
+        if(!isset($_POST['Phone']) || $_POST['Phone'] === '')
             $this->setErrors($this->getBranceRaysPhoneRequired());
         else if(!preg_match('/^[0-9]{11}$/', $_POST['Phone']))
             $this->setErrors($this->getBranceRaysPhoneLength());
-        if(!isset($_POST['Country']) || isset($_POST['Country']) && $_POST['Country'] === '')
+        if(!isset($_POST['Country']) || $_POST['Country'] === '')
             $this->setErrors($this->getBranceRaysCountryRequired());
         else if(strlen($_POST['Country']) < 3)
             $this->setErrors($this->getBranceRaysCountryLength());
-        if(!isset($_POST['Governments']) || isset($_POST['Governments']) && $_POST['Governments'] === '')
+        if(!isset($_POST['Governments']) || $_POST['Governments'] === '')
             $this->setErrors($this->getBranceRaysGovernmentsRequired());
         else if(strlen($_POST['Governments']) < 3)
             $this->setErrors($this->getBranceRaysGovernmentsLength());
-        if(!isset($_POST['City']) || isset($_POST['City']) && $_POST['City'] === '')
+        if(!isset($_POST['City']) || $_POST['City'] === '')
             $this->setErrors($this->getBranceRaysCityRequired());
         else if(strlen($_POST['City']) < 3)
             $this->setErrors($this->getBranceRaysCityLength());
-        if(!isset($_POST['Street']) || isset($_POST['Street']) && $_POST['Street'] === '')
+        if(!isset($_POST['Street']) || $_POST['Street'] === '')
             $this->setErrors($this->getBranceRaysStreetRequired());
         else if(strlen($_POST['Street']) < 3)
             $this->setErrors($this->getBranceRaysStreetLength());
-        if(!isset($_POST['Building']) || isset($_POST['Building']) && $_POST['Building'] === '')
+        if(!isset($_POST['Building']) || $_POST['Building'] === '')
             $this->setErrors($this->getBranceRaysBuildingRequired());
         else if(strlen($_POST['Building']) < 3)
             $this->setErrors($this->getBranceRaysBuildingLength());
-        if(!isset($_POST['Address']) || isset($_POST['Address']) && $_POST['Address'] === '')
+        if(!isset($_POST['Address']) || $_POST['Address'] === '')
             $this->setErrors($this->getBranceRaysAddressRequired());
         else if(strlen($_POST['Address']) < 3)
             $this->setErrors($this->getBranceRaysAddressLength());
-        if(!isset($_POST['Follow']) || isset($_POST['Follow']) && $_POST['Follow'] === '')
+        if(!isset($_POST['Follow']) || $_POST['Follow'] === '')
             $this->setErrors($this->getBranceRaysFollowRequired());
         else if(!isset($this->getModel2()['SelectBranchBox'][$_POST['Follow']]))
             $this->setErrors($this->getModel2()[$this->getUrlName2()]['BranceRaysFollowValue']);

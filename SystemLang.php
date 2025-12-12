@@ -42,7 +42,7 @@ class Systemlang extends AdminMenu{
         $this->WordHint = $this->getModel2()[$this->getUrlName2()]['WordHint'];
     }
     function isValid(){
-        if(!isset($_POST['word']) || isset($_POST['word']) && $_POST['word'] === '')
+        if(!isset($_POST['word']) || $_POST['word'] === '')
             $this->setErrors($this->getTextRequired());
         else if(!isset($_GET['lang']) || !isset($_GET['table']) || !isset($_GET['key']) || strlen($_POST['word']) < 3 || !isset($this->getModel()->getObj()[$_GET['lang']][$_GET['table']][$_GET['key']]) && !isset($_GET['array']) || isset($_GET['array']) && !isset($this->getModel()->getObj()[$_GET['lang']][$_GET['table']][$_GET['key']][$_GET['array']]))
             $this->setErrors($this->getTextLenght());

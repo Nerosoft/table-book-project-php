@@ -39,7 +39,7 @@ class Home extends Page{
         $this->HintInputNumber = $this->getModel2()[$this->getUrlName2()]['HintInputNumber'];
     }
     function isValid(){
-       if(!isset($_POST['name']) || isset($_POST['name']) && $_POST['name'] === '')
+       if(!isset($_POST['name']) || $_POST['name'] === '')
             $this->setErrors($this->getNameTableIsReq());
         else if(strlen($_POST['name']) < 3)
             $this->setErrors($this->getNameTableIsInv());
@@ -50,7 +50,7 @@ class Home extends Page{
                 $myData[$code]['MyFlexTables'][$_POST['id']] = $_POST['name'];
             $this->getModel()->saveModel($myData);
         }
-        else if(!isset($_POST['input_number']) || isset($_POST['input_number']) && $_POST['input_number'] === '')
+        else if(!isset($_POST['input_number']) || $_POST['input_number'] === '')
             $this->setErrors($this->getInputNumberTableIsReq());
         else if($_POST['input_number'] > 8)
             $this->setErrors($this->getInputNumberTableIsInv());

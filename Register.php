@@ -25,19 +25,13 @@ class Register extends LoginRegister{
         $this->PasswordDosNotMatch = $this->getModel2()[$this->getUrlName2()]['PasswordDosNotMatch'];
     }
     function isValid(){
-        if(!isset($_POST['Email']) || isset($_POST['Email']) && $_POST['Email'] === '')
-            $this->setErrors($this->getRequiredEmail());
-        else if(strlen($_POST['Email']) < 3 || in_array($_POST['Email'], array_map(function($obj) {return $obj->getEmail();}, $this->getUsers())))
+        if(strlen($_POST['Email']) < 3 || in_array($_POST['Email'], array_map(function($obj) {return $obj->getEmail();}, $this->getUsers())))
             $this->setErrors($this->getInvalidEmail());
-        if(!isset($_POST['Password']) || $_POST['Password'] === '')
-            $this->setErrors($this->getRequiredPassword());
-        else if(strlen($_POST['Password']) < 8)
-            $this->setErrors($this->getInvalidPassword());
         if(!isset($_POST['password_confirmation']) || $_POST['password_confirmation'] === '')
             $this->setErrors($this->getRequiredConfirmPassword());
         else if(strlen($_POST['password_confirmation']) < 8)
             $this->setErrors($this->getInvalidConfirmPassword());
-        else if(!isset($_POST['Password']) && $_POST['Password'] !== $_POST['Password'] && strlen($_POST['Password']) >= 8)
+        else if($_POST['Password'] !== $_POST['Password'] && strlen($_POST['Password']) >= 8)
             $this->setErrors($this->getPasswordDosNotMatch());
         if(!isset($_POST['Key']) || $_POST['Key'] === '')
             $this->setErrors($this->getRequiredKeyPassword());

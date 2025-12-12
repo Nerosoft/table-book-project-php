@@ -22,102 +22,41 @@ class AdminMenu extends InformationPage
     private $TabelEvent;
     function __construct($obj){
         parent::__construct($obj->getModel()->getObj()['Setting']['Language'], $obj);
-        if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['brancChange']))
-            $this->showCustomeMessage(function()use($obj){
-                if(isset($obj->getModel()->getBranch()[$_POST['brancChange']]) || $_SESSION['staticId'] === $_POST['brancChange']){
-                    $obj->getModel()->resetId();
-                    $this->setLanguage($obj->getModel()->getObj()['Setting']['Language']);
-                    $this->setTitle($obj->getModel2()[$this->getUrlName2()]['Title']);
-                    include 'admin_title.php';
-                    $toast = $obj->getModel2()['Branches']['SuccessfullyChangeBranch'];
-                    if($this->getSCRIPTFILENAME() === 'MyFlexTables' && !isset($this->getModel2()[$_GET['id']]))
-                        header("Location: home.php");
-                    else if($this->getSCRIPTFILENAME() === 'SystemLang' && !(isset($_GET['lang']) && isset($_GET['table']) && isset($obj->getModel()->getObj()[$_GET['lang']][$_GET['table']])))
-                        header("Location: SystemLang.php");
-                }else{
-                    include 'admin_title.php';
-                    $toast = $obj->getModel2()['Branches']['ErrorChangeBranch'];
-                    $type = 'danger';
-                }
-                include 'toast_message.php';
-            });
-        else if($_SERVER["REQUEST_METHOD"] === "POST" && $this->getUrlName2() === 'SystemLang'){
-            include 'admin_title.php';
-            $obj->isValid();
-        }
-        else if($_SERVER["REQUEST_METHOD"] === "POST" ){
-            include 'admin_title.php';
-            if(isset($_POST['id']) && $_POST['id'] === '' || 
-            isset($_POST['deleting']) && !isset($_POST['id']) || 
-            isset($_POST['change_language']) && !isset($_POST['id']))
-                $this->setErrors($obj->getModel2()[$this->getUrlName2()]['IdIsReq']);
-            else if(
-            isset($_POST['id']) && !isset($obj->getModel()->getBranch()[$_POST['id']]) && $this->getUrlName2() === 'Branches' ||
-            isset($_POST['id']) && $obj->getModel()->getId() === $_POST['id'] && $this->getUrlName2() === 'Branches' && isset($_POST['deleting'])||
-            isset($_POST['id']) && !isset($obj->getModel2()['MyFlexTables'][$_POST['id']]) && $this->getUrlName2() === 'Home'||
-            isset($_POST['id']) && isset($_GET['id']) && !isset($this->getModel()->getObj()[$_GET['id']][$_POST['id']]) && $this->getUrlName2() === 'MyFlexTables' ||
-            isset($_POST['id']) && !isset($obj->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'ChangeLanguage'||
-            isset($_POST['id']) && $_POST['id'] === $this->getLanguage() && $this->getUrlName2() === 'ChangeLanguage' && isset($_POST['deleting']))
-                $this->setErrors($obj->getModel2()[$this->getUrlName2()]['IdIsInv']);
-            
-            if($this->isEmptyErrors() && isset($_POST['deleting']))
-                $obj->makeDeleteItem();
-            else if($this->isEmptyErrors() && isset($_POST['change_language']))
-                $obj->makeChangeLanguage();
-            else if($this->isEmptyErrors())
-                $obj->isValid();
-            $this->showCustomeMessage(function()use($obj){
-                if($this->isEmptyErrors()){
-                    $toast = $obj->getModel2()[$this->getUrlName2()][isset($_POST['id'])?(isset($_POST['deleting'])?'Delete':(isset($_POST['change_language']) ? 'ChangeLang' :'MessageModelEdit')):'MessageModelCreate'];
-                    include 'toast_message.php';
-                }else{
-                    $type = 'danger';
-                    foreach ($this->getErrors() as $key => $toast)
-                        include 'toast_message.php'; 
-                }
-            });
-        }else{
-                include 'admin_title.php';
-                $this->showCustomeMessage(function($type = 'success')use($obj){
-                    $toast = $obj->getModel2()[$this->getUrlName2()]['LoadMessage'];
-                    include 'toast_message.php'; 
-                });  
+        $this->Ssearch = $obj->getModel2()['TableInfo']['Ssearch'];
+        $this->InfoEmpty = $obj->getModel2()['TableInfo']['InfoEmpty'];
+        $this->ZeroRecords = $obj->getModel2()['TableInfo']['ZeroRecords'];
+        $this->Info = $obj->getModel2()['TableInfo']['Info'];
+        $this->LengthMenu = $obj->getModel2()['TableInfo']['LengthMenu'];
+        $this->InfoFiltered = $obj->getModel2()['TableInfo']['InfoFiltered'];
+        $this->BranchesCompany = $obj->getModel2()['AppSettingAdmin']['BranchesCompany'];
+        $this->Offcanvas = $obj->getModel2()['AppSettingAdmin']['Offcanvas'];
+        $this->Logout = $obj->getModel2()['AppSettingAdmin']['Logout'];
+
+        $this->TableId = $obj->getModel2()[$this->getUrlName2()]['TableId'];
+        $this->TabelEvent = $obj->getModel2()[$this->getUrlName2()]['TabelEvent'];
+        $this->ScreenModelEdit = $obj->getModel2()[$this->getUrlName2()]['ScreenModelEdit'];
+        $this->ButtonModelEdit = $obj->getModel2()[$this->getUrlName2()]['ButtonModelEdit'];
+
+        $this->AdminDashboard = $obj->getModel2()['AppSettingAdmin']['AdminDashboard'];
+        if($this->getUrlName2() === 'SystemLang'){
+            $this->myMenuApp = array('Home'=>$obj->getModel2()['Menu']['Home'], 'SystemLang'=>$obj->getModel2()['Menu']['SystemLang']);
+            foreach ($obj->getModel2()['AllNamesLanguage'] as $key => $value){
+                $this->myMenuApp[$key] = array($value);
+                foreach (array_keys($obj->getModel2()) as $key2 => $table) 
+                    $this->myMenuApp[$key][$table] = $obj?->getModel2()[$table]['MYTITLE']??$obj->getModel2()['AppSettingAdmin'][$table];
             }
-                $this->Ssearch = $obj->getModel2()['TableInfo']['Ssearch'];
-                $this->InfoEmpty = $obj->getModel2()['TableInfo']['InfoEmpty'];
-                $this->ZeroRecords = $obj->getModel2()['TableInfo']['ZeroRecords'];
-                $this->Info = $obj->getModel2()['TableInfo']['Info'];
-                $this->LengthMenu = $obj->getModel2()['TableInfo']['LengthMenu'];
-                $this->InfoFiltered = $obj->getModel2()['TableInfo']['InfoFiltered'];
-                $this->BranchesCompany = $obj->getModel2()['AppSettingAdmin']['BranchesCompany'];
-                $this->Offcanvas = $obj->getModel2()['AppSettingAdmin']['Offcanvas'];
-                $this->Logout = $obj->getModel2()['AppSettingAdmin']['Logout'];
-
-                $this->TableId = $obj->getModel2()[$this->getUrlName2()]['TableId'];
-                $this->TabelEvent = $obj->getModel2()[$this->getUrlName2()]['TabelEvent'];
-                $this->ScreenModelEdit = $obj->getModel2()[$this->getUrlName2()]['ScreenModelEdit'];
-                $this->ButtonModelEdit = $obj->getModel2()[$this->getUrlName2()]['ButtonModelEdit'];
-
-                $this->AdminDashboard = $obj->getModel2()['AppSettingAdmin']['AdminDashboard'];
-                if($this->getUrlName2() === 'SystemLang'){
-                    $this->myMenuApp = array('Home'=>$obj->getModel2()['Menu']['Home'], 'SystemLang'=>$obj->getModel2()['Menu']['SystemLang']);
-                    foreach ($obj->getModel2()['AllNamesLanguage'] as $key => $value){
-                        $this->myMenuApp[$key] = array($value);
-                        foreach (array_keys($obj->getModel2()) as $key2 => $table) 
-                            $this->myMenuApp[$key][$table] = $obj?->getModel2()[$table]['MYTITLE']??$obj->getModel2()['AppSettingAdmin'][$table];
-                    }
-                }
-                else if(isset($obj->getModel2()['MyFlexTables'])){
-                    $this->myMenuApp = $obj->getModel2()['Menu'];
-                    $arr = $obj->getModel2()['MyFlexTables'];
-                    array_unshift($arr, $this->myMenuApp['MyFlexTables']);
-                    $this->myMenuApp['MyFlexTables'] = $arr;
-                }else{
-                    $this->myMenuApp = $obj->getModel2()['Menu'];
-                    unset($this->myMenuApp['MyFlexTables']);
-                }
-                $this->MyBranch = array($obj->getModel()->getFixedId()=>new Branch($obj->getModel2()['AppSettingAdmin']['BranchMain']), ...Branch::fromArray($obj));
-                include 'menu_layout.php';
+        }
+        else if(isset($obj->getModel2()['MyFlexTables'])){
+            $this->myMenuApp = $obj->getModel2()['Menu'];
+            $arr = $obj->getModel2()['MyFlexTables'];
+            array_unshift($arr, $this->myMenuApp['MyFlexTables']);
+            $this->myMenuApp['MyFlexTables'] = $arr;
+        }else{
+            $this->myMenuApp = $obj->getModel2()['Menu'];
+            unset($this->myMenuApp['MyFlexTables']);
+        }
+        $this->MyBranch = array($obj->getModel()->getFixedId()=>new Branch($obj->getModel2()['AppSettingAdmin']['BranchMain']), ...Branch::fromArray($obj));
+        include 'menu_layout.php';
         
     }
     public function getIconByKey($key){

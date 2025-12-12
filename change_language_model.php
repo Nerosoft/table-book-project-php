@@ -5,6 +5,7 @@ $title = $view->getModelTitle();
 $button = $view->getModelButton();
 include('start_model.php');
 include 'my_id2.php';
+echo '<input type="hidden" name="change_language">';
 foreach ($view->getMyLanguage() as $key => $value)
     if($key === $view->getLanguage())
         echo <<<HTML

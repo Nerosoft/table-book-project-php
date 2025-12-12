@@ -60,7 +60,7 @@ class ChangeLanguage extends Page{
         
     }
     function isValid(){
-       if(!isset($_POST['lang_name']) || isset($_POST['lang_name']) && $_POST['lang_name'] === '')
+       if(!isset($_POST['lang_name']) || $_POST['lang_name'] === '')
             $this->setErrors($this->getNewLangNameRequired());
         else if(strlen($_POST['lang_name']) < 3)
             $this->setErrors($this->getNewLangNameInvalid());
@@ -86,7 +86,6 @@ class ChangeLanguage extends Page{
         $myData = $this->getModel()->getObj();
         $myData['Setting']['Language'] = $_POST['id'];
         $this->getModel()->saveModel($myData);
-        $this->setLanguage($_POST['id']);
     }
     function makeDeleteItem(){
         $myData = $this->getModel()->getObj();

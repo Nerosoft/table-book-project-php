@@ -26,7 +26,7 @@ class Flextable extends Page{
     }
     function isValid(){
         foreach ($this->getErrorsMessageReq() as $key => $value) {
-            if(!isset($_POST[$key]) || isset($_POST[$key]) && $_POST[$key] === '')
+            if(!isset($_POST[$key]) || $_POST[$key] === '')
                 $this->setErrors($this->getErrorsMessageReq()[$key]);
             else if(strlen($_POST[$key]) < 3)
                 $this->setErrors($this->getErrorsMessageInv()[$key]);
