@@ -1,6 +1,6 @@
 {
     "admin": {
-        "MyLanguage":{
+        "MyLanguage": {
             "Menu": {
                 "SystemLang": "Edit my language1",
                 "Home": "Home",
@@ -276,7 +276,7 @@
         },
         "english": {
             "Menu": {
-                "SystemLang": "Edit my language1",
+                "SystemLang": "Edit my language",
                 "Home": "Home",
                 "Branches": "Branches",
                 "ChangeLanguage": "Change language",
