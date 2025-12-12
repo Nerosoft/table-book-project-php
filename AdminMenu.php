@@ -116,13 +116,16 @@ class InformationPage{
                 }
             });
         }else if(isset($_SESSION['userId']) && isset($_SESSION['staticId'])){
+            $this->Title = $obj->getModel2()[$this->getUrlName2()]['Title'];
             include 'admin_title.php';
             $this->showCustomeMessage(function($type = 'success')use($obj){
                 $toast = $obj->getModel2()[$this->getUrlName2()]['LoadMessage'];
                 include 'toast_message.php'; 
             });  
-        }else
+        }else{
+           $this->Title = $obj->getModel2()[$this->getUrlName2()]['Title'];
            include 'title_html.php';
+        }
         
 
     }
@@ -150,3 +153,4 @@ class InformationPage{
         return pathinfo($_SERVER['SCRIPT_FILENAME'])['filename'];
     }
 }
+
