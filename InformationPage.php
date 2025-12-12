@@ -1,5 +1,6 @@
 <?php
 require 'ModelJson.php';
+require 'Users.php';
 class InformationPage{
     private $Title;
     private $Language;
@@ -17,7 +18,7 @@ class InformationPage{
     function isEmptyErrors(){
         return empty($this->Errors);
     }
-    function __construct($language, $obj = null){
+    function __construct($language, $obj){
         $this->Language = $language;
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['superId']) && isset($obj->getModel()->getFile()[$_POST['superId']]) && isset($_POST['Email']) && isset($_POST['Password']) && $this->getUrlName2() === 'Login' || $_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['superId']) && isset($obj->getModel()->getFile()[$_POST['superId']]) && isset($_POST['Email']) && isset($_POST['Password']) && $this->getUrlName2() === 'Register'){
             if($_POST['Email'] === '')
@@ -30,7 +31,7 @@ class InformationPage{
                 $this->setErrors($this->getInvalidPassword());
             $this->users = isset($this->getModel()->getObj()['Users']) ? Users::fromArray($this->getModel()->getObj()['Users']):array();
             $obj->isValid();
-            $this->setTitle($obj->getModel2()[$this->getUrlName2()]['Title']);
+            $this->Title = $obj->getModel2()[$this->getUrlName2()]['Title'];
             include 'title_html.php';
             $this->showCustomeMessage(function($type = 'danger'){
                 foreach ($this->getErrors() as $key => $toast)
@@ -40,12 +41,11 @@ class InformationPage{
             $this->showCustomeMessage(function()use($obj){
                 if(isset($obj->getModel()->getBranch()[$_POST['brancChange']]) || $_SESSION['staticId'] === $_POST['brancChange']){
                     $obj->getModel()->resetId();
-                    $this->setLanguage($obj->getModel()->getObj()['Setting']['Language']);
+                    $this->Language = $obj->getModel()->getObj()['Setting']['Language'];
                     if($this->getSCRIPTFILENAME() === 'MyFlexTables' && !isset($this->getModel2()[$_GET['id']])){
                         header("Location: home.php");
                         exit;
-                    }
-                    else if($this->getSCRIPTFILENAME() === 'SystemLang' && !(isset($_GET['lang']) && isset($_GET['table']) && isset($obj->getModel()->getObj()[$_GET['lang']][$_GET['table']]))){
+                    }else if($this->getSCRIPTFILENAME() === 'SystemLang' && !(isset($_GET['lang']) && isset($_GET['table']) && isset($obj->getModel()->getObj()[$_GET['lang']][$_GET['table']]))){
                         header("Location: SystemLang.php");
                         exit;
                     }
@@ -115,13 +115,16 @@ class InformationPage{
                 }
             });
         }else if(isset($_SESSION['userId']) && isset($_SESSION['staticId'])){
+            $this->Title = $obj->getModel2()[$this->getUrlName2()]['Title'];
             include 'admin_title.php';
             $this->showCustomeMessage(function($type = 'success')use($obj){
                 $toast = $obj->getModel2()[$this->getUrlName2()]['LoadMessage'];
                 include 'toast_message.php'; 
             });  
-        }else
-           include 'title_html.php';
+        }else{
+            $this->Title = $obj->getModel2()[$this->getUrlName2()]['Title'];
+            include 'title_html.php';
+        }
         
 
     }
