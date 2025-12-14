@@ -1,0 +1,1 @@
+<input type="hidden" value="<?php echo $view->getModel()->getId()?>" name="superId">
