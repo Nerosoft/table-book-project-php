@@ -56,21 +56,18 @@ class Home extends Page{
             $this->setErrors($this->getInputNumberTableIsInv());
         else if($this->isEmptyErrors()){
             $key = $this->getModel()->getRandomId();
-            $myInputKey = array();
-            for ($i=0; $i < $_POST['input_number']; $i++)
-                array_push($myInputKey, $this->getModel()->getRandomId());
-
             $myData =  $this->getModel()->getObj();
             foreach ($this->getModel2()['AllNamesLanguage'] as $code => $value) {
                 $myData[$code]['MyFlexTables'][$key] = $_POST['name'];
                 $myData[$code][$key] = $myData[$code]['TablePage'];
                 $myData[$code][$key]['MYTITLE'] = $_POST['name'];
-                foreach ($myInputKey as $key2){
-                    $myData[$code][$key]['TableHead'][$key2] = $myData[$code]['AppSettingAdmin']['InputNameTable'];
-                    $myData[$code][$key]['Label'][$key2] = $myData[$code]['AppSettingAdmin']['InputLabel'];
-                    $myData[$code][$key]['Hint'][$key2] = $myData[$code]['AppSettingAdmin']['InputHint'];
-                    $myData[$code][$key]['ErrorsMessageReq'][$key2] = $myData[$code]['AppSettingAdmin']['InputErrorsMessageReq'];
-                    $myData[$code][$key]['ErrorsMessageInv'][$key2] = $myData[$code]['AppSettingAdmin']['InputErrorsMessageInv'];
+                 for ($i=0; $i < $_POST['input_number']; $i++){
+                    $myInputKey = $this->getModel()->getRandomId();
+                    $myData[$code][$key]['TableHead'][$myInputKey] = $myData[$code]['AppSettingAdmin']['InputNameTable'];
+                    $myData[$code][$key]['Label'][$myInputKey] = $myData[$code]['AppSettingAdmin']['InputLabel'];
+                    $myData[$code][$key]['Hint'][$myInputKey] = $myData[$code]['AppSettingAdmin']['InputHint'];
+                    $myData[$code][$key]['ErrorsMessageReq'][$myInputKey] = $myData[$code]['AppSettingAdmin']['InputErrorsMessageReq'];
+                    $myData[$code][$key]['ErrorsMessageInv'][$myInputKey] = $myData[$code]['AppSettingAdmin']['InputErrorsMessageInv'];
                 }
             }
             $this->getModel()->saveModel($myData);
