@@ -34,7 +34,6 @@ class HomeCreatePost extends MessageError{
                 }
             }
             $this->getView()->saveModel($myData);
-            $this->getView()->initMenuAdmin();
         }
     }
 }

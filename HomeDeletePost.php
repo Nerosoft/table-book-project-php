@@ -16,7 +16,6 @@ class HomeDeletePost extends ValidationId{
             if(isset($myData[$_POST['id']]))
                 unset($myData[$_POST['id']]);
             $this->getView()->saveModel($myData);
-            $this->getView()->initMenuAdmin();
         }
     }
 }

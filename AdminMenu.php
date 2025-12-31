@@ -35,26 +35,6 @@ class AdminMenu extends InformationPage
         $this->ScreenModelEdit = $this->getModel2()[$this->getUrlName2()]['ScreenModelEdit'];
         $this->ButtonModelEdit = $this->getModel2()[$this->getUrlName2()]['ButtonModelEdit'];
         $this->AdminDashboard = $this->getModel2()['AppSettingAdmin']['AdminDashboard'];
-        if($this->getUrlName2() === 'SystemLang'){
-            $this->myMenuApp = array('Home'=>$this->getModel2()['Menu']['Home'], 'SystemLang'=>$this->getModel2()['Menu']['SystemLang']);
-            foreach ($this->getModel2()['AllNamesLanguage'] as $key => $value){
-                $this->myMenuApp[$key] = array($value);
-                foreach (array_keys($this->getModel2()) as $key2 => $table) 
-                    $this->myMenuApp[$key][$table] = $this?->getModel2()[$table]['MYTITLE']??$this->getModel2()['AppSettingAdmin'][$table];
-            }
-        }else
-            $this->initMenuAdmin();
-    }
-    function initMenuAdmin(){
-        if(isset($this->getModel2()['MyFlexTables'])){
-            $this->myMenuApp = $this->getModel2()['Menu'];
-            $arr = $this->getModel2()['MyFlexTables'];
-            array_unshift($arr, $this->myMenuApp['MyFlexTables']);
-            $this->myMenuApp['MyFlexTables'] = $arr;
-        }else{
-            $this->myMenuApp = $this->getModel2()['Menu'];
-            unset($this->myMenuApp['MyFlexTables']);
-        }        
     }
     public function getIconByKey($key){
         if($key === 'Home')
@@ -124,6 +104,22 @@ class AdminMenu extends InformationPage
         return array($this->getFixedId()=>new Branch($this->getModel2()['AppSettingAdmin']['BranchMain']), ...Branch::fromArray($this->getBranch()));
     }
     function getMyMenuApp(){
+        if($this->getUrlName2() === 'SystemLang'){
+            $this->myMenuApp = array('Home'=>$this->getModel2()['Menu']['Home'], 'SystemLang'=>$this->getModel2()['Menu']['SystemLang']);
+            foreach ($this->getModel2()['AllNamesLanguage'] as $key => $value){
+                $this->myMenuApp[$key] = array($value);
+                foreach (array_keys($this->getModel2()) as $key2 => $table) 
+                    $this->myMenuApp[$key][$table] = $this?->getModel2()[$table]['MYTITLE']??$this->getModel2()['AppSettingAdmin'][$table];
+            }
+        }else if(isset($this->getModel2()['MyFlexTables'])){
+            $this->myMenuApp = $this->getModel2()['Menu'];
+            $arr = $this->getModel2()['MyFlexTables'];
+            array_unshift($arr, $this->myMenuApp['MyFlexTables']);
+            $this->myMenuApp['MyFlexTables'] = $arr;
+        }else{
+            $this->myMenuApp = $this->getModel2()['Menu'];
+            unset($this->myMenuApp['MyFlexTables']);
+        }        
         return $this->myMenuApp;
     }
     function getBranchesCompany(){

@@ -12,7 +12,6 @@ class HomeEditPost extends ValidationId{
             foreach ($this->getView()->getModel2()['AllNamesLanguage'] as $code => $value) 
                 $myData[$code]['MyFlexTables'][$_POST['id']] = $_POST['name'];
             $this->getView()->saveModel($myData);
-            $this->getView()->initMenuAdmin();
         }
     }
 }
