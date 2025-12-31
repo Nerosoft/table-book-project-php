@@ -9,7 +9,6 @@ class AdminMenu extends InformationPage
     private $Logout;
     private $AdminDashboard;
     private $myMenuApp;
-    private $MyBranch;
     private $Ssearch;
     private $ZeroRecords;
     private $LengthMenu;
@@ -20,47 +19,45 @@ class AdminMenu extends InformationPage
     private $ButtonModelEdit;
     private $TableId;
     private $TabelEvent;
-    function __construct($obj){
-        parent::__construct($obj->getModel()->getObj()['Setting']['Language'], $obj);
-        $this->Ssearch = $obj->getModel2()['TableInfo']['Ssearch'];
-        $this->InfoEmpty = $obj->getModel2()['TableInfo']['InfoEmpty'];
-        $this->ZeroRecords = $obj->getModel2()['TableInfo']['ZeroRecords'];
-        $this->Info = $obj->getModel2()['TableInfo']['Info'];
-        $this->LengthMenu = $obj->getModel2()['TableInfo']['LengthMenu'];
-        $this->InfoFiltered = $obj->getModel2()['TableInfo']['InfoFiltered'];
-        $this->BranchesCompany = $obj->getModel2()['AppSettingAdmin']['BranchesCompany'];
-        $this->Offcanvas = $obj->getModel2()['AppSettingAdmin']['Offcanvas'];
-        $this->Logout = $obj->getModel2()['AppSettingAdmin']['Logout'];
-
-        $this->TableId = $obj->getModel2()[$this->getUrlName2()]['TableId'];
-        $this->TabelEvent = $obj->getModel2()[$this->getUrlName2()]['TabelEvent'];
-        $this->ScreenModelEdit = $obj->getModel2()[$this->getUrlName2()]['ScreenModelEdit'];
-        $this->ButtonModelEdit = $obj->getModel2()[$this->getUrlName2()]['ButtonModelEdit'];
-
-        $this->AdminDashboard = $obj->getModel2()['AppSettingAdmin']['AdminDashboard'];
+    function __construct($IdPage){
+        parent::__construct($IdPage);
+        $this->Ssearch = $this->getModel2()['TableInfo']['Ssearch'];
+        $this->InfoEmpty = $this->getModel2()['TableInfo']['InfoEmpty'];
+        $this->ZeroRecords = $this->getModel2()['TableInfo']['ZeroRecords'];
+        $this->Info = $this->getModel2()['TableInfo']['Info'];
+        $this->LengthMenu = $this->getModel2()['TableInfo']['LengthMenu'];
+        $this->InfoFiltered = $this->getModel2()['TableInfo']['InfoFiltered'];
+        $this->BranchesCompany = $this->getModel2()['AppSettingAdmin']['BranchesCompany'];
+        $this->Offcanvas = $this->getModel2()['AppSettingAdmin']['Offcanvas'];
+        $this->Logout = $this->getModel2()['AppSettingAdmin']['Logout'];
+        $this->TableId = $this->getModel2()[$this->getUrlName2()]['TableId'];
+        $this->TabelEvent = $this->getModel2()[$this->getUrlName2()]['TabelEvent'];
+        $this->ScreenModelEdit = $this->getModel2()[$this->getUrlName2()]['ScreenModelEdit'];
+        $this->ButtonModelEdit = $this->getModel2()[$this->getUrlName2()]['ButtonModelEdit'];
+        $this->AdminDashboard = $this->getModel2()['AppSettingAdmin']['AdminDashboard'];
         if($this->getUrlName2() === 'SystemLang'){
-            $this->myMenuApp = array('Home'=>$obj->getModel2()['Menu']['Home'], 'SystemLang'=>$obj->getModel2()['Menu']['SystemLang']);
-            foreach ($obj->getModel2()['AllNamesLanguage'] as $key => $value){
+            $this->myMenuApp = array('Home'=>$this->getModel2()['Menu']['Home'], 'SystemLang'=>$this->getModel2()['Menu']['SystemLang']);
+            foreach ($this->getModel2()['AllNamesLanguage'] as $key => $value){
                 $this->myMenuApp[$key] = array($value);
-                foreach (array_keys($obj->getModel2()) as $key2 => $table) 
-                    $this->myMenuApp[$key][$table] = $obj?->getModel2()[$table]['MYTITLE']??$obj->getModel2()['AppSettingAdmin'][$table];
+                foreach (array_keys($this->getModel2()) as $key2 => $table) 
+                    $this->myMenuApp[$key][$table] = $this?->getModel2()[$table]['MYTITLE']??$this->getModel2()['AppSettingAdmin'][$table];
             }
-        }
-        else if(isset($obj->getModel2()['MyFlexTables'])){
-            $this->myMenuApp = $obj->getModel2()['Menu'];
-            $arr = $obj->getModel2()['MyFlexTables'];
+        }else
+            $this->initMenuAdmin();
+    }
+    function initMenuAdmin(){
+        if(isset($this->getModel2()['MyFlexTables'])){
+            $this->myMenuApp = $this->getModel2()['Menu'];
+            $arr = $this->getModel2()['MyFlexTables'];
             array_unshift($arr, $this->myMenuApp['MyFlexTables']);
             $this->myMenuApp['MyFlexTables'] = $arr;
         }else{
-            $this->myMenuApp = $obj->getModel2()['Menu'];
+            $this->myMenuApp = $this->getModel2()['Menu'];
             unset($this->myMenuApp['MyFlexTables']);
-        }
-        $this->MyBranch = array($obj->getModel()->getFixedId()=>new Branch($obj->getModel2()['AppSettingAdmin']['BranchMain']), ...Branch::fromArray($obj));
-        include 'menu_layout.php';
-        
+        }        
     }
     public function getIconByKey($key){
-        if($key === 'Home')//--
+        if($key === 'Home')
             return 'box-arrow-left.svg';
         else if($key === 'SystemLang')
                 return 'gear.svg';  
@@ -124,10 +121,7 @@ class AdminMenu extends InformationPage
         return $this->InfoFiltered;
     }
     function getMyBranch(){
-        return $this->MyBranch;
-    }
-    function setMyBranch($branch){
-        $this->MyBranch = $branch;
+        return array($this->getFixedId()=>new Branch($this->getModel2()['AppSettingAdmin']['BranchMain']), ...Branch::fromArray($this->getBranch()));
     }
     function getMyMenuApp(){
         return $this->myMenuApp;

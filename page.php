@@ -1,5 +1,7 @@
 <?php
 require 'AdminMenu.php';
+//make home index page
+//dont save value = $_POST
 class Page extends AdminMenu{
     private $ScreenModelCreate;
     private $ButtonModelCreate;
@@ -8,14 +10,14 @@ class Page extends AdminMenu{
     private $messageModelDelete;
     private $buttonModelDelete;
     private $LoadMessage;
-    function __construct($obj){
-        parent::__construct($obj);
-        $this->ScreenModelCreate = $obj->getModel2()[$this->getUrlName2()]['ScreenModelCreate'];
-        $this->ButtonModelCreate = $obj->getModel2()[$this->getUrlName2()]['ButtonModelCreate'];
-        $this->ButtonModelAdd = $obj->getModel2()[$this->getUrlName2()]['ButtonModelAdd'];
-        $this->ScreenModelDelete = $obj->getModel2()[$this->getUrlName2()]['ScreenModelDelete'];
-        $this->messageModelDelete = $obj->getModel2()[$this->getUrlName2()]['MessageModelDelete'];
-        $this->buttonModelDelete = $obj->getModel2()[$this->getUrlName2()]['ButtonModelDelete'];
+    function __construct($IdPage){
+        parent::__construct($IdPage);
+        $this->ScreenModelCreate = $this->getModel2()[$this->getUrlName2()]['ScreenModelCreate'];
+        $this->ButtonModelCreate = $this->getModel2()[$this->getUrlName2()]['ButtonModelCreate'];
+        $this->ButtonModelAdd = $this->getModel2()[$this->getUrlName2()]['ButtonModelAdd'];
+        $this->ScreenModelDelete = $this->getModel2()[$this->getUrlName2()]['ScreenModelDelete'];
+        $this->messageModelDelete = $this->getModel2()[$this->getUrlName2()]['MessageModelDelete'];
+        $this->buttonModelDelete = $this->getModel2()[$this->getUrlName2()]['ButtonModelDelete'];
     }
     function getScreenModelCreate(){
         return $this->ScreenModelCreate;

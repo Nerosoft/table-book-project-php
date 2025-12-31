@@ -1,1 +1,1 @@
-<input type="hidden" value="<?php echo $view->getModel()->getId()?>" name="superId">
+<input type="hidden" value="<?php echo $view->getId()?>" name="superId">

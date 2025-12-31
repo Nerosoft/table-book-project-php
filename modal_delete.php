@@ -5,7 +5,7 @@ $idModel = "deleteModel".$index;
 $idForm = "deleteForm".$index;
 include('start_model.php');
 include ('my_id.php');
-echo '<input type="hidden" name="deleting">'.$view->getmessageModelDelete().'<spam>-'.($nameItem??$myObject->getName()).'</spam>';
+echo $view->getmessageModelDelete().'<spam>-'.($nameItem??$myObject->getName()).'</spam>';
 ?>
 </div>
 <div class="modal-footer">

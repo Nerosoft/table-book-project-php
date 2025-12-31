@@ -8,9 +8,9 @@ class MyLanguage
     function getName(){
         return $this->name;
     }
-    static function fromArray($obj) {
+    static function fromArray($myLanguage) {
         $lang = array();
-        foreach ($obj->getModel2()['AllNamesLanguage'] as $key=>$value)
+        foreach ($myLanguage as $key=>$value)
             $lang[$key] =  new MyLanguage($value);
         return $lang;
     }

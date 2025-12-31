@@ -111,6 +111,7 @@
             "Register": {
                 "MYTITLE": "Register",
                 "Title": "Register",
+                "DbIdInv": "invalid database id",
                 "TitleForm": "Register form",
                 "LabelEmail": "Email",
                 "HintEmail": "Enter your email",
@@ -142,6 +143,7 @@
             "Login": {
                 "MYTITLE": "Login",
                 "Title": "Login",
+                "DbIdInv": "invalid database id",
                 "TitleForm": "Login form",
                 "LabelEmail": "Email",
                 "HintEmail": "Enter your email",
@@ -386,6 +388,7 @@
             "Register": {
                 "MYTITLE": "Register",
                 "Title": "Register",
+                "DbIdInv": "invalid database id",
                 "TitleForm": "Register form",
                 "LabelEmail": "Email",
                 "HintEmail": "Enter your email",
@@ -417,6 +420,7 @@
             "Login": {
                 "MYTITLE": "Login",
                 "Title": "Login",
+                "DbIdInv": "invalid database id",
                 "TitleForm": "Login form",
                 "LabelEmail": "Email",
                 "HintEmail": "Enter your email",
@@ -548,7 +552,7 @@
             }
         },
         "Users": {
-            "gQc89c28": {
+            "tX5783e4": {
                 "Email": "ggamals7744@yahoo.com",
                 "Password": "ggamals7744@yahoo.com",
                 "Key": "ggamals7744@yahoo.com"

@@ -23,9 +23,6 @@ class ModelJson{
         $this->File = $file;
         file_put_contents("data.json", json_encode($file, JSON_PRETTY_PRINT));
     }
-    function getInfo($obj){
-        return $this->File[$this->id][$obj->getLanguage()];
-    }
     function getObj(){
         return $this->File[$this->id];
     }
@@ -46,10 +43,7 @@ class ModelJson{
         return $this->id;
     }
     function resetId(){
-        $_SESSION['userId'] = $_POST['brancChange'];
-        $this->id = $_POST['brancChange'];
-    }
-    function getRandomId(){
-        return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 2) . substr(uniqid(), -6);
+        $_SESSION['userId'] = $_POST['id'];
+        $this->id = $_POST['id'];
     }
 }

@@ -3,9 +3,10 @@
 <?php
 $title = $view->getModelTitle();
 $button = $view->getModelButton();
+$action = 'ChangeLangPost.php';
 include('start_model.php');
 include 'my_id2.php';
-echo '<input type="hidden" name="change_language">';
+echo '<input type="hidden" name="change_language" value="'.$view->getUrlName2().'">';
 foreach ($view->getMyLanguage() as $key => $value)
     if($key === $view->getLanguage())
         echo <<<HTML
