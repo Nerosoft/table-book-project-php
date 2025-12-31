@@ -27,7 +27,7 @@ class SystemLangEditPost extends MessageError{
     }
 }
 $view2 = new SystemLangEditPost();
-$view = $view2->getView();
+$view = new MySystemlang();
 include 'SystemLang_view.php';
 }else
     header('LOCATION:SystemLang');
