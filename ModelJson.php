@@ -18,10 +18,7 @@ class ModelJson{
             $this->id = $_POST['superId'];
         else
             $this->id = 'admin';
-
-        $this->Language = isset($_COOKIE[$this->getId()]) && isset($this->getObj()[$_COOKIE[$this->getId()]]) &&
-        !(isset($_SESSION['userId']) && isset($_SESSION['staticId']))
-        ?$_COOKIE[$this->getId()]:$this->getObj()['Setting']['Language'];
+        $this->Language = isset($_COOKIE[$this->getId()]) && isset($this->getObj()[$_COOKIE[$this->getId()]]) && !isset($_SESSION['staticId'])?$_COOKIE[$this->getId()]:$this->getObj()['Setting']['Language'];
     }
     function getModel2(){
         return $this->getObj()[$this->getLanguage()];

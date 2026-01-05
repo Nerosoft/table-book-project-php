@@ -2,7 +2,7 @@
 include 'SessionAdmin.php';
 require 'MyHome.php';
 require 'MessageError.php';
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['userId']) && isset($_SESSION['staticId'])){
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['staticId'])){
 class HomeCreatePost extends MessageError{
     use ErrorsHome;
     private $ToastMessage;

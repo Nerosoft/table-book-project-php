@@ -2,7 +2,7 @@
 include 'SessionAdmin.php';
 require 'MyChangeLanguage.php';
 require 'ValidationId.php';
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['userId']) && isset($_SESSION['staticId'])){
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['staticId'])){
 class ChangeLanguageEditPost extends ValidationId{
     use ErrorChangelanguage;
     function __construct(){

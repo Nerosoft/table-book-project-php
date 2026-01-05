@@ -2,7 +2,7 @@
 include 'SessionAdmin.php';
 require 'MyFlexTablesView.php';
 require 'MessageError.php';
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['userId']) && isset($_SESSION['staticId']) && isset((new ModelJson($_GET['id']))->getObj()[(new ModelJson($_GET['id']))->getObj()['Setting']['Language']][$_GET['id']])){
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['staticId'])){
 class FlexTablesCreatePost extends MessageError{
     use ErrorFlexTable;
     private $ToastMessage;
