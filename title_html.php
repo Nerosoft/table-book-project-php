@@ -4,6 +4,9 @@
 <body>
 <?php
     if($_SERVER["REQUEST_METHOD"] === "POST" && $view2->isEmptyErrors())
-        $view2->showSuccessMessage();
+        $view2->showCustomeMessage(function()use($view2){
+            $toast = $view2->getToastMessage();
+            include 'toast_message.php';
+        });
     else if($_SERVER["REQUEST_METHOD"] === "POST")
         $view2->displayErrors();

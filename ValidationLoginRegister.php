@@ -2,6 +2,7 @@
 require 'Users.php';
 require 'MessageError.php';
 class ValidationLoginRegister extends MessageError{
+    use ErrorLoginRegister;
     private $users;
     function getUsers(){
         return $this->users;
@@ -11,24 +12,25 @@ class ValidationLoginRegister extends MessageError{
         $_SESSION['staticId'] = $_POST['superId'];
         header('Location:Home.php');
     }
-    function __construct($view){
-        parent::__construct($view);
-        $this->users = isset($this->getView()->getObj()['Users']) ? Users::fromArray($this->getView()->getObj()['Users']):array();
-        if(!isset($_POST['superId']) || !isset($this->getView()->getFile()[$_POST['superId']])){
-            $this->setErrors($this->getView()->getModelPage()['DbIdInv']);
+    function __construct($IdPage){
+        parent::__construct($IdPage);
+        $this->initErrorsLoginRegister($this->getModelPage());
+        $this->users = isset($this->getObj()['Users']) ? Users::fromArray($this->getObj()['Users']):array();
+        if(!isset($_POST['superId']) || !isset($this->getFile()[$_POST['superId']])){
+            $this->setErrors($this->getModelPage()['DbIdInv']);
         }
         if(!isset($_POST['Email']) || $_POST['Email'] === '')
-            $this->setErrors($this->getView()->getRequiredEmail());
+            $this->setErrors($this->getRequiredEmail());
         else if(!preg_match('/^[\w]+@[\w]+\.[a-zA-z]{2,6}$/', $_POST['Email']))
-            $this->setErrors($this->getView()->getInvalidEmail());
+            $this->setErrors($this->getInvalidEmail());
         if(!isset($_POST['Password']) || $_POST['Password'] === '')
-            $this->setErrors($this->getView()->getRequiredPassword());
+            $this->setErrors($this->getRequiredPassword());
         else if(strlen($_POST['Password']) < 8)
-            $this->setErrors($this->getView()->getInvalidPassword());
+            $this->setErrors($this->getInvalidPassword());
     }
     function getEmailExist(){
         if(isset($_POST['Email']) && in_array($_POST['Email'], array_map(function($obj) {return $obj->getEmail();}, $this->getUsers())))
-            $this->setErrors($this->getView()->getModel2()[$this->getView()->getUrlName2()]['EmailExist']);
+            $this->setErrors($this->getModel2()[$this->getUrlName2()]['EmailExist']);
     }
 }
 ?>

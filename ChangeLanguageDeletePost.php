@@ -1,25 +1,25 @@
 <?php
 include 'SessionAdmin.php';
-require 'ValidationId.php';
 require 'MyChangeLanguage.php';
+require 'ValidationId.php';
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['userId']) && isset($_SESSION['staticId'])){
 class ChangeLanguageDeletePost extends ValidationId{
+    use ErrorChangelanguageAllNames;
     function __construct(){
-        parent::__construct(new MyChangeLanguage(), 'Delete');
+        parent::__construct('ChangeLanguage', 'Delete');
+        $this->initErrorChangelanguageAllNames($this->getModel2()['AllNamesLanguage']);
         if($this->isEmptyErrors()){
-            $myData = $this->getView()->getObj();
+            $myData = $this->getObj();
             unset($myData[$_POST['id']]);
-            foreach ($this->getView()->getallNames() as $key=>$value)
+            foreach ($this->getallNames() as $key=>$value)
                 if($key !== $_POST['id'])
                     unset($myData[$key]['AllNamesLanguage'][$_POST['id']]);
-            $this->getView()->saveModel($myData);
+            $this->saveModel($myData);
         }
     }
 }
-
 $view2 = new ChangeLanguageDeletePost();
-$view = $view2->getView();
-
+$view = new MyChangeLanguage();
 include 'ChangeLanguage_view.php';
 }else
     header('LOCATION:ChangeLanguage');

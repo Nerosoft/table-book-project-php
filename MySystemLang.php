@@ -1,23 +1,18 @@
 <?php
 require 'AdminMenu.php';
+require 'ErrorSystemlang.php';
 class MySystemlang extends AdminMenu{
+    use ErrorSystemlang;
     private $LanguageName;
     private $LanguageValue;
-    private $TextRequired;
-    private $TextLenght;
     private $Text;
     private $WordHint;
+    private $DataView;
     function getLanguageName(){
         return $this->LanguageName;
     }
     function getLanguageValue(){
         return $this->LanguageValue;
-    }
-    function getTextRequired(){
-        return $this->TextRequired;
-    }
-    function getTextLenght(){
-        return $this->TextLenght;
     }
     function getText(){
         return $this->Text;
@@ -27,23 +22,23 @@ class MySystemlang extends AdminMenu{
     }
     function __construct(){
         parent::__construct('SystemLang');
-        $this->TextRequired = $this->getModel2()[$this->getUrlName2()]['TextRequired'];
-        $this->TextLenght = $this->getModel2()[$this->getUrlName2()]['TextLenght'];
+        $this->initErrorSystemlang($this->getModelPage());
         $this->LanguageName = $this->getModel2()[$this->getUrlName2()]['LanguageName'];
         $this->LanguageValue = $this->getModel2()[$this->getUrlName2()]['LanguageValue'];
         $this->Text = $this->getModel2()[$this->getUrlName2()]['Text'];
         $this->WordHint = $this->getModel2()[$this->getUrlName2()]['WordHint'];
-    }
-    function getMyDataView(){
         if(isset($_GET['lang']) && isset($_GET['table']) && isset($this->getObj()[$_GET['lang']][$_GET['table']]))
-            return $this->getObj()[$_GET['lang']][$_GET['table']];
+            $this->DataView = $this->getObj()[$_GET['lang']][$_GET['table']];
         else if(!(isset($_GET['lang']) && isset($_GET['table']))){
             $tableData = array();
             foreach ($this->getModel2()['AllNamesLanguage'] as $key=>$value)
                 $tableData[$key] = $this->getObj()[$key];
-            return $tableData;
+            $this->DataView = $tableData;
         }
         else
-            return array();
+            $this->DataView = array();
+    }
+    function getMyDataView(){
+        return $this->DataView;
     }
 }

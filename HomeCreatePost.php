@@ -1,26 +1,27 @@
 <?php
 include 'SessionAdmin.php';
-require 'MessageError.php';
 require 'MyHome.php';
+require 'MessageError.php';
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['userId']) && isset($_SESSION['staticId'])){
 class HomeCreatePost extends MessageError{
-    function showSuccessMessage(){
-        $this->getView()->showCustomeMessage(function(){
-            $toast = $this->getView()->getModelPage()['MessageModelCreate'];
-            include 'toast_message.php';
-        });
+    use ErrorsHome;
+    private $ToastMessage;
+    function getToastMessage(){
+        return $this->ToastMessage;
     }
     function __construct(){
-        parent::__construct(new MyHome());
-        $this->validCustomTable();
+        parent::__construct('Home');
+        $this->initErrorsHome($this->getModelPage());
+        $this->ToastMessage = $this->getModelPage()['MessageModelCreate'];
+        $this->validCustomTable($this);
         if(!isset($_POST['input_number']) || $_POST['input_number'] === '')
-            $this->setErrors($this->getView()->getInputNumberTableIsReq());
+            $this->setErrors($this->getInputNumberTableIsReq());
         else if($_POST['input_number'] > 8)
-            $this->setErrors($this->getView()->getInputNumberTableIsInv());
+            $this->setErrors($this->getInputNumberTableIsInv());
         else if($this->isEmptyErrors()){
             $key = $this->getRandomId();
-            $myData = $this->getView()->getObj();
-            foreach ($this->getView()->getModel2()['AllNamesLanguage'] as $code => $value) {
+            $myData = $this->getObj();
+            foreach ($this->getModel2()['AllNamesLanguage'] as $code => $value) {
                 $myData[$code]['MyFlexTables'][$key] = $_POST['name'];
                 $myData[$code][$key] = $myData[$code]['TablePage'];
                 $myData[$code][$key]['MYTITLE'] = $_POST['name'];
@@ -33,13 +34,13 @@ class HomeCreatePost extends MessageError{
                     $myData[$code][$key]['ErrorsMessageInv'][$myInputKey] = $myData[$code]['AppSettingAdmin']['InputErrorsMessageInv'];
                 }
             }
-            $this->getView()->saveModel($myData);
+            $this->saveModel($myData);
         }
     }
 }
 
 $view2 = new HomeCreatePost();
-$view = $view2->getView();
+$view = new MyHome();
 include 'home_view.php';
 }else
     header('LOCATION:Home');

@@ -1,28 +1,22 @@
 <?php
 require 'InformationPage.php';
 require 'MyLanguage.php';
+require 'ErrorLoginRegister.php';
 class LoginRegister extends InformationPage{
+    use ErrorLoginRegister;
     private $TitleForm;
     private $LabelEmail;
     private $HintEmail;
     private $LabelPassword;
     private $HintPassword;
     private $ButtonName;
-    private $RequiredEmail;
-    private $InvalidEmail;
-    private $RequiredPassword;
-    private $InvalidPassword;
     private $MyLanguage;
     private $ChangeLanguageButton;
     private $ModelTitle;
     private $ModelButton;
-    private $ChangeLang;
     function __construct($IdPage){
         parent::__construct($IdPage);
-        $this->RequiredEmail = $this->getModel2()[$this->getUrlName2()]['RequiredEmail'];
-        $this->InvalidEmail = $this->getModel2()[$this->getUrlName2()]['InvalidEmail'];
-        $this->RequiredPassword = $this->getModel2()[$this->getUrlName2()]['RequiredPassword'];
-        $this->InvalidPassword = $this->getModel2()[$this->getUrlName2()]['InvalidPassword'];
+        $this->initErrorsLoginRegister($this->getModelPage());
         $this->TitleForm = $this->getModel2()[$this->getUrlName2()]['TitleForm'];
         $this->LabelEmail = $this->getModel2()[$this->getUrlName2()]['LabelEmail'];
         $this->HintEmail = $this->getModel2()[$this->getUrlName2()]['HintEmail'];
@@ -33,10 +27,6 @@ class LoginRegister extends InformationPage{
         $this->ChangeLanguageButton = $this->getModel2()[$this->getUrlName2()]['ChangeLanguageButton'];
         $this->ModelTitle = $this->getModel2()[$this->getUrlName2()]['ModelTitle'];
         $this->ModelButton = $this->getModel2()[$this->getUrlName2()]['ModelButton'];
-        $this->ChangeLang = $this->getModel2()[$this->getUrlName2()]['UsedLanguage'];
-    }
-    function getChangeLang(){
-        return $this->ChangeLang;
     }
     function getChangeLanguageButton(){
         return $this->ChangeLanguageButton;
@@ -67,17 +57,5 @@ class LoginRegister extends InformationPage{
     }
     function getButtonName(){
         return $this->ButtonName;
-    }
-    function getRequiredEmail(){
-        return $this->RequiredEmail;
-    }
-    function getInvalidEmail(){
-        return $this->InvalidEmail;
-    }
-    function getRequiredPassword(){
-        return $this->RequiredPassword;
-    }
-    function getInvalidPassword(){
-        return $this->InvalidPassword;
     }
 }

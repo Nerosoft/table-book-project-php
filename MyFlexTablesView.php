@@ -1,29 +1,24 @@
 <?php
 require 'page.php';
-if(!isset((new ModelJson())->getObj()[(new ModelJson())->getObj()['Setting']['Language']][$_GET['id']]))
+require 'ErrorFlexTable.php';
+if(!isset((new ModelJson($_GET['id']))->getObj()[(new ModelJson($_GET['id']))->getObj()['Setting']['Language']][$_GET['id']]))
     header("Location: home.php");
 class MyFlexTablesView extends Page{
-    private $ErrorsMessageReq;
-    private $ErrorsMessageInv;
+    use ErrorFlexTable;
     private $TableHead;
     private $Label;
     private $Hint;
+    private $DataView;
     function __construct(){
         parent::__construct($_GET['id']);
-        $this->ErrorsMessageReq = $this->getModelPage()['ErrorsMessageReq'];
-        $this->ErrorsMessageInv = $this->getModelPage()['ErrorsMessageInv'];
+        $this->initErrorFlexTable($this->getModelPage());
         $this->TableHead = $this->getModelPage()['TableHead'];
         $this->Label = $this->getModelPage()['Label'];
         $this->Hint = $this->getModelPage()['Hint'];
+        $this->DataView = isset($this->getObj()[$_GET['id']])?array_reverse($this->getObj()[$_GET['id']]):array();
     }
     function getMyDataView(){
-        return isset($this->getObj()[$_GET['id']])?array_reverse($this->getObj()[$_GET['id']]):array();
-    }
-    function getErrorsMessageReq(){
-        return $this->ErrorsMessageReq;
-    }
-    function getErrorsMessageInv(){
-        return $this->ErrorsMessageInv;
+        return $this->DataView;
     }
     function getTableHead(){
         return $this->TableHead;

@@ -1,32 +1,32 @@
 <?php
 include 'SessionAdmin.php';
-require 'MessageError.php';
 require 'MyBranch.php';
+require 'MessageError.php';
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['userId']) && isset($_SESSION['staticId'])){
 class BranchCreatePost extends MessageError{
-    function showSuccessMessage(){
-        $this->getView()->showCustomeMessage(function(){
-            $toast = $this->getView()->getModelPage()['MessageModelCreate'];
-            include 'toast_message.php';
-        });
+    use ErrorBranch;
+    private $ToastMessage;
+    function getToastMessage(){
+        return $this->ToastMessage;
     }
     function __construct(){
-        parent::__construct(new MyBranch());
-        $this->ValidBranch();
+        parent::__construct('Branches');
+        $this->ToastMessage = $this->getModelPage()['MessageModelCreate'];
+        $this->initErrorBranch($this->getModelPage());
+        $this->ValidBranch($this);
         if($this->isEmptyErrors()){
-            $file = $this->getView()->getFile();
+            $file = $this->getFile();
             $keyId = $this->getRandomId();
-            $obj = $this->getView()->getFileByFixedId();
+            $obj = $this->getFileByFixedId();
             unset($obj['Branches'], $obj['Users']);
             $file [$keyId] = $obj;
-            $file[$this->getView()->getFixedId()]['Branches'][$keyId] = $_POST;
-            $this->getView()->saveFile($file);
+            $this->saveBranch($keyId, $file);
         }
     }
 }
 
 $view2 = new BranchCreatePost();
-$view = $view2->getView();
+$view = new MyBranch();
 include 'Branch_view.php';
 }else
     header('LOCATION:Branches');

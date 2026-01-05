@@ -1,7 +1,9 @@
 <?php
 require 'page.php';
 require 'CustomTable.php';
+require 'ErrorsHome.php';
 class MyHome extends Page{
+    use ErrorsHome;
     private $ScreenModelCreate;
     private $ButtonModelCreate;
     private $ScreenModelEdit;
@@ -11,24 +13,19 @@ class MyHome extends Page{
     private $HintName;
     private $LabelInputNumber;
     private $HintInputNumber;
-    private $NameTableIsReq;
-    private $NameTableIsInv;
-    private $InputNumberTableIsReq;
-    private $InputNumberTableIsInv;
+    private $DataView;
     function __construct(){
         parent::__construct('Home');
-        $this->NameTableIsReq = $this->getObj()[$this->getObj()['Setting']['Language']][$this->getUrlName2()]['NameTableIsReq'];
-        $this->NameTableIsInv = $this->getObj()[$this->getObj()['Setting']['Language']][$this->getUrlName2()]['NameTableIsInv'];
-        $this->InputNumberTableIsReq = $this->getObj()[$this->getObj()['Setting']['Language']][$this->getUrlName2()]['InputNumberTableIsReq'];
-        $this->InputNumberTableIsInv = $this->getObj()[$this->getObj()['Setting']['Language']][$this->getUrlName2()]['InputNumberTableIsInv']; 
+        $this->initErrorsHome($this->getModelPage());
         $this->TableName = $this->getModel2()[$this->getUrlName2()]['NameTable'];
         $this->LabelName = $this->getModel2()[$this->getUrlName2()]['LabelName'];
         $this->HintName = $this->getModel2()[$this->getUrlName2()]['HintName'];
         $this->LabelInputNumber = $this->getModel2()[$this->getUrlName2()]['LabelInputNumber'];
         $this->HintInputNumber = $this->getModel2()[$this->getUrlName2()]['HintInputNumber'];
+        $this->DataView = isset($this->getModel2()['MyFlexTables'])?array_reverse(CustomTable::fromArray($this)):array();
     }
     function getMyDataView(){
-        return isset($this->getModel2()['MyFlexTables'])?array_reverse(CustomTable::fromArray($this)):array();
+        return $this->DataView;
     }
     function getTableName(){
         return $this->TableName;
@@ -44,17 +41,5 @@ class MyHome extends Page{
     }
     function getHintInputNumber(){
         return $this->HintInputNumber;
-    }
-    function getNameTableIsReq(){
-        return $this->NameTableIsReq;
-    }
-    function getNameTableIsInv(){
-        return $this->NameTableIsInv;
-    }
-    function getInputNumberTableIsReq(){
-        return $this->InputNumberTableIsReq;
-    }
-    function getInputNumberTableIsInv(){
-        return $this->InputNumberTableIsInv;
     }
 }

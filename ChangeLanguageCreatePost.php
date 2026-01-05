@@ -1,38 +1,37 @@
 <?php
 include 'SessionAdmin.php';
-require 'MessageError.php';
 require 'MyChangeLanguage.php';
+require 'MessageError.php';
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['userId']) && isset($_SESSION['staticId'])){
 class ChangeLanguageCreatePost extends MessageError{
-    function showSuccessMessage(){
-        $this->getView()->showCustomeMessage(function(){
-            $toast = $this->getView()->getModelPage()['MessageModelCreate'];
-            include 'toast_message.php';
-        });
+    use ErrorChangelanguage;
+    private $ToastMessage;
+    function getToastMessage(){
+        return $this->ToastMessage;
     }
     function __construct(){
-        parent::__construct(new MyChangeLanguage());
-        $this->validChangeLanguage();
+        parent::__construct('ChangeLanguage');
+        $this->initErrorChangelanguage($this->getModel2());
+        $this->ToastMessage = $this->getModelPage()['MessageModelCreate'];
+        $this->validChangeLanguage($this);
         if($this->isEmptyErrors()){
             $newKey = $this->getRandomId();
-            $myData = $this->getView()->getObj();
-            foreach ($this->getView()->getallNames() as $key=>$value)
-                $myData[$key]['AllNamesLanguage'][$newKey] = $_POST['lang_name'];
+            $myData = $this->getObj();
+            $this->saveLanguageDatabase($newKey, $myData, $this);
             $myData[$newKey] = $myData['MyLanguage'];
-            $myData[$newKey]['AllNamesLanguage'] = $myData[$this->getView()->getLanguage()]['AllNamesLanguage'];
-            if(isset($myData[$this->getView()->getLanguage()]['MyFlexTables']))
-                foreach ($myData[$this->getView()->getLanguage()]['MyFlexTables'] as $key => $value){ 
+            $myData[$newKey]['AllNamesLanguage'] = $myData[$this->getLanguage()]['AllNamesLanguage'];
+            if(isset($myData[$this->getLanguage()]['MyFlexTables']))
+                foreach ($myData[$this->getLanguage()]['MyFlexTables'] as $key => $value){ 
                     $myData[$newKey]['MyFlexTables'][$key] = $value;
-                    $myData[$newKey][$key] = $myData[$this->getView()->getLanguage()][$key];   
-                }
-            
-            $this->getView()->saveModel($myData);
+                    $myData[$newKey][$key] = $myData[$this->getLanguage()][$key];   
+                }  
+            $this->saveModel($myData);
         }
     }
 }
 
 $view2 = new ChangeLanguageCreatePost();
-$view = $view2->getView();
+$view = new MyChangeLanguage();
 include 'ChangeLanguage_view.php';
 }else
     header('LOCATION:ChangeLanguage');

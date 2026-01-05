@@ -4,31 +4,33 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     require 'MyRegister.php';
     require 'ValidationLoginRegister.php';
     class RegisterPost extends ValidationLoginRegister{
+        use ErrorRegister;
         function __construct(){
-            parent::__construct(new MyRegister());
+            parent::__construct('Register');
+            $this->initErrorsRegister($this->getModelPage());
             $this->getEmailExist();
             if(!isset($_POST['password_confirmation']) || $_POST['password_confirmation'] === '')
-                $this->setErrors($this->getView()->getRequiredConfirmPassword());
+                $this->setErrors($this->getRequiredConfirmPassword());
             else if(strlen($_POST['password_confirmation']) < 8)
-                $this->setErrors($this->getView()->getInvalidConfirmPassword());
+                $this->setErrors($this->getInvalidConfirmPassword());
             else if($_POST['Password'] !== $_POST['Password'] && strlen($_POST['Password']) >= 8)
-                $this->setErrors($this->getView()->getPasswordDosNotMatch());
+                $this->setErrors($this->getPasswordDosNotMatch());
             if(!isset($_POST['Key']) || $_POST['Key'] === '')
-                $this->setErrors($this->getView()->getRequiredKeyPassword());
+                $this->setErrors($this->getRequiredKeyPassword());
             else if(strlen($_POST['Key']) < 8)
-                $this->setErrors($this->getView()->getInvalidKeyPassword());
+                $this->setErrors($this->getInvalidKeyPassword());
             else if($this->isEmptyErrors()){
                 $this->redirectToAdminPage();
-                $allUsers = $this->getView()->getObj();
+                $allUsers = $this->getObj();
                 unset($_POST['superId'], $_POST['password_confirmation']);
                 $allUsers['Users'][$this->getRandomId()] = $_POST;
-                $this->getView()->saveModel($allUsers);
+                $this->saveModel($allUsers);
                 exit;
             }
         }
     }
     $view2 = new RegisterPost();
-    $view = $view2->getView();
+    $view = new MyRegister();
     include 'register_view.php';
 }else
     header('LOCATION:Register.php');

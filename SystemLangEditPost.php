@@ -1,28 +1,29 @@
 <?php
 include 'SessionAdmin.php';
-require 'MessageError.php';
 require 'MySystemlang.php';
+require 'MessageError.php';
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['userId']) && isset($_SESSION['staticId'])){
 class SystemLangEditPost extends MessageError{
-    function showSuccessMessage(){
-        $this->getView()->showCustomeMessage(function(){
-            $toast = $this->getView()->getModelPage()['AllLanguageEdit'];
-            include 'toast_message.php';
-        });
+    use ErrorSystemlang;
+    private $ToastMessage;
+    function getToastMessage(){
+        return $this->ToastMessage;
     }
     function __construct(){
-        parent::__construct(new MySystemlang());
+        parent::__construct('SystemLang');
+        $this->initErrorSystemlang($this->getModelPage());
+        $this->ToastMessage = $this->getModelPage()['AllLanguageEdit'];
         if(!isset($_POST['word']) || $_POST['word'] === '')
-            $this->setErrors($this->getView()->getTextRequired());
-        else if(!isset($_GET['lang']) || !isset($_GET['table']) || !isset($_GET['key']) || strlen($_POST['word']) < 3 || !isset($this->getView()->getObj()[$_GET['lang']][$_GET['table']][$_GET['key']]) && !isset($_GET['array']) || isset($_GET['array']) && !isset($this->getView()->getObj()[$_GET['lang']][$_GET['table']][$_GET['key']][$_GET['array']]))
-            $this->setErrors($this->getView()->getTextLenght());
+            $this->setErrors($this->getTextRequired());
+        else if(!isset($_GET['lang']) || !isset($_GET['table']) || !isset($_GET['key']) || strlen($_POST['word']) < 3 || !isset($this->getObj()[$_GET['lang']][$_GET['table']][$_GET['key']]) && !isset($_GET['array']) || isset($_GET['array']) && !isset($this->getObj()[$_GET['lang']][$_GET['table']][$_GET['key']][$_GET['array']]))
+            $this->setErrors($this->getTextLenght());
         if($this->isEmptyErrors()){
-            $file = $this->getView()->getObj();
+            $file = $this->getObj();
             if(isset($_GET['array']))
                 $file[$_GET['lang']][$_GET['table']][$_GET['key']][$_GET['array']] = $_POST['word'];
             else
                 $file[$_GET['lang']][$_GET['table']][$_GET['key']] = $_POST['word'];
-            $this->getView()->saveModel($file);
+            $this->saveModel($file);
         }
     }
 }

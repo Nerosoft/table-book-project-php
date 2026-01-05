@@ -1,10 +1,9 @@
 <?php
 
-class MessageError{
+class MessageError extends ModelJson{
     private $Errors = array();
-    private $view;
-    function __construct($view){
-        $this->view = $view;
+    function __construct($IdPage){
+        parent::__construct($IdPage);
     }
     function setErrors($error){
         array_push($this->Errors, $error);
@@ -15,80 +14,86 @@ class MessageError{
     function isEmptyErrors(){
         return empty($this->Errors);
     }
-    function getView(){
-        return $this->view;
-    }
     function getRandomId(){
         return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 2) . substr(uniqid(), -6);
     }
     function displayErrors(){
-        $this->getView()->showCustomeMessage(function($type = 'danger'){
+        $this->showCustomeMessage(function($type = 'danger'){
             foreach ($this->getErrors() as $key => $toast)
                 include 'toast_message.php'; 
         });
     }
-    function validCustomTable(){
+    function validCustomTable($obj){
         if(!isset($_POST['name']) || $_POST['name'] === '')
-            $this->setErrors($this->getView()->getNameTableIsReq());
+            $obj->setErrors($obj->getNameTableIsReq());
         else if(strlen($_POST['name']) < 3)
-            $this->setErrors($this->getView()->getNameTableIsInv());
+            $obj->setErrors($obj->getNameTableIsInv());
     }
-    function ValidBranch(){
+    function ValidBranch($obj){
         if(!isset($_POST['Name']) || $_POST['Name'] === '')
-            $this->setErrors($this->getView()->getBranceRaysNameRequired());
+            $this->setErrors($obj->getBranceRaysNameRequired());
         else if(strlen($_POST['Name']) < 3)
-            $this->setErrors($this->getView()->getBranceRaysNameLength());
+            $this->setErrors($obj->getBranceRaysNameLength());
         if(!isset($_POST['Phone']) || $_POST['Phone'] === '')
-            $this->setErrors($this->getView()->getBranceRaysPhoneRequired());
+            $this->setErrors($obj->getBranceRaysPhoneRequired());
         else if(!preg_match('/^[0-9]{11}$/', $_POST['Phone']))
-            $this->setErrors($this->getView()->getBranceRaysPhoneLength());
+            $this->setErrors($obj->getBranceRaysPhoneLength());
         if(!isset($_POST['Country']) || $_POST['Country'] === '')
-            $this->setErrors($this->getView()->getBranceRaysCountryRequired());
+            $this->setErrors($obj->getBranceRaysCountryRequired());
         else if(strlen($_POST['Country']) < 3)
-            $this->setErrors($this->getView()->getBranceRaysCountryLength());
+            $this->setErrors($obj->getBranceRaysCountryLength());
         if(!isset($_POST['Governments']) || $_POST['Governments'] === '')
-            $this->setErrors($this->getView()->getBranceRaysGovernmentsRequired());
+            $this->setErrors($obj->getBranceRaysGovernmentsRequired());
         else if(strlen($_POST['Governments']) < 3)
-            $this->setErrors($this->getView()->getBranceRaysGovernmentsLength());
+            $this->setErrors($obj->getBranceRaysGovernmentsLength());
         if(!isset($_POST['City']) || $_POST['City'] === '')
-            $this->setErrors($this->getView()->getBranceRaysCityRequired());
+            $this->setErrors($obj->getBranceRaysCityRequired());
         else if(strlen($_POST['City']) < 3)
-            $this->setErrors($this->getView()->getBranceRaysCityLength());
+            $this->setErrors($obj->getBranceRaysCityLength());
         if(!isset($_POST['Street']) || $_POST['Street'] === '')
-            $this->setErrors($this->getView()->getBranceRaysStreetRequired());
+            $this->setErrors($obj->getBranceRaysStreetRequired());
         else if(strlen($_POST['Street']) < 3)
-            $this->setErrors($this->getView()->getBranceRaysStreetLength());
+            $this->setErrors($obj->getBranceRaysStreetLength());
         if(!isset($_POST['Building']) || $_POST['Building'] === '')
-            $this->setErrors($this->getView()->getBranceRaysBuildingRequired());
+            $this->setErrors($obj->getBranceRaysBuildingRequired());
         else if(strlen($_POST['Building']) < 3)
-            $this->setErrors($this->getView()->getBranceRaysBuildingLength());
+            $this->setErrors($obj->getBranceRaysBuildingLength());
         if(!isset($_POST['Address']) || $_POST['Address'] === '')
-            $this->setErrors($this->getView()->getBranceRaysAddressRequired());
+            $this->setErrors($obj->getBranceRaysAddressRequired());
         else if(strlen($_POST['Address']) < 3)
-            $this->setErrors($this->getView()->getBranceRaysAddressLength());
+            $this->setErrors($obj->getBranceRaysAddressLength());
         if(!isset($_POST['Follow']) || $_POST['Follow'] === '')
-            $this->setErrors($this->getView()->getBranceRaysFollowRequired());
-        else if(!isset($this->getView()->getModel2()['SelectBranchBox'][$_POST['Follow']]))
-            $this->setErrors($this->getView()->getModel2()[$this->getView()->getUrlName2()]['BranceRaysFollowValue']);
+            $this->setErrors($obj->getBranceRaysFollowRequired());
+        else if(!isset($this->getModel2()['SelectBranchBox'][$_POST['Follow']]))
+            $this->setErrors($this->getModel2()[$this->getUrlName2()]['BranceRaysFollowValue']);
     }
-    function validChangeLanguage(){
+    function validChangeLanguage($obj){
         if(!isset($_POST['lang_name']) || $_POST['lang_name'] === '')
-            $this->setErrors($this->getView()->getNewLangNameRequired());
+            $this->setErrors($obj->getNewLangNameRequired());
         else if(strlen($_POST['lang_name']) < 3)
-            $this->setErrors($this->getView()->getNewLangNameInvalid());
+            $this->setErrors($obj->getNewLangNameInvalid());
     }
     function validFlexTable(){
-        foreach ($this->getView()->getErrorsMessageReq() as $key => $value) {
+        foreach ($this->getErrorsMessageReq() as $key => $value) {
             if(!isset($_POST[$key]) || $_POST[$key] === '')
-                $this->getView()->setErrors($this->getView()->getErrorsMessageReq()[$key]);
+                $this->setErrors($this->getErrorsMessageReq()[$key]);
             else if(strlen($_POST[$key]) < 3)
-                $this->getView()->setErrors($this->getView()->getErrorsMessageInv()[$key]);
+                $this->setErrors($this->getErrorsMessageInv()[$key]);
         }
     }
     function saveFlexDataBase($keyId){
-        $myData = $this->getView()->getObj();
-        foreach ($this->getView()->getErrorsMessageReq() as $key => $value)
+        $myData = $this->getObj();
+        foreach ($this->getErrorsMessageReq() as $key => $value)
             $myData[$_GET['id']][$keyId][$key] = $_POST[$key];
-        $this->getView()->saveModel($myData);
+        $this->saveModel($myData);
+    }
+    //------------------------------------------------------------------
+    function saveBranch($keyId, $file){
+        $file[$this->getFixedId()]['Branches'][$keyId] = $_POST;
+        $this->saveFile($file);
+    }
+    function saveLanguageDatabase($newKey, &$myData, $obj){
+        foreach ($obj->getallNames() as $key=>$value)
+            $myData[$key]['AllNamesLanguage'][$newKey] = $_POST['lang_name'];
     }
 }
