@@ -81,13 +81,13 @@ class MessageError extends ModelJson{
                 $this->setErrors($this->getErrorsMessageInv()[$key]);
         }
     }
+    //------------------------------------------------------------------
     function saveFlexDataBase($keyId){
         $myData = $this->getObj();
         foreach ($this->getErrorsMessageReq() as $key => $value)
             $myData[$_GET['id']][$keyId][$key] = $_POST[$key];
         $this->saveModel($myData);
     }
-    //------------------------------------------------------------------
     function saveBranch($keyId, $file){
         $file[$this->getFixedId()]['Branches'][$keyId] = $_POST;
         $this->saveFile($file);
