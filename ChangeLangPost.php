@@ -9,8 +9,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['change_language']) && 
             parent::__construct($_POST['change_language'], 'ChangeLang');
             if(!isset($_POST['superId']) || !isset($this->getFile()[$_POST['superId']])){
                 $this->setErrors($this->getModelPage()['DbIdInv']);
-            }else if($this->isEmptyErrors())
+            }else if($this->isEmptyErrors()){
                 setcookie($this->getId(), $_POST['id'], time()+2628000);
+                $_COOKIE[$this->getId()] = $_POST['id'];
+            }
         }
     }
     $view2 = new ChangeLangPost();
