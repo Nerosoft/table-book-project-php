@@ -103,6 +103,6 @@ else if($_SERVER["REQUEST_METHOD"] === "POST")
   $view2->displayErrors();
 else
 $view->showCustomeMessage(function($type = 'success')use($view){
-  $toast = $view->getModel2()[$view->getUrlName2()]['LoadMessage'];
+  $toast = $view->getModelPage()['LoadMessage'];
   include 'toast_message.php'; 
 });

@@ -31,10 +31,10 @@ class AdminMenu extends InformationPage
         $this->BranchesCompany = $this->getModel2()['AppSettingAdmin']['BranchesCompany'];
         $this->Offcanvas = $this->getModel2()['AppSettingAdmin']['Offcanvas'];
         $this->Logout = $this->getModel2()['AppSettingAdmin']['Logout'];
-        $this->TableId = $this->getModel2()[$this->getUrlName2()]['TableId'];
-        $this->TabelEvent = $this->getModel2()[$this->getUrlName2()]['TabelEvent'];
-        $this->ScreenModelEdit = $this->getModel2()[$this->getUrlName2()]['ScreenModelEdit'];
-        $this->ButtonModelEdit = $this->getModel2()[$this->getUrlName2()]['ButtonModelEdit'];
+        $this->TableId = $this->getModelPage()['TableId'];
+        $this->TabelEvent = $this->getModelPage()['TabelEvent'];
+        $this->ScreenModelEdit = $this->getModelPage()['ScreenModelEdit'];
+        $this->ButtonModelEdit = $this->getModelPage()['ButtonModelEdit'];
         $this->AdminDashboard = $this->getModel2()['AppSettingAdmin']['AdminDashboard'];
         $this->mySelectBranch = array($this->getFixedId()=>new Branch($this->getModel2()['AppSettingAdmin']['BranchMain']), ...Branch::fromArray($this->getBranch()));
         if($this->getUrlName2() === 'SystemLang'){

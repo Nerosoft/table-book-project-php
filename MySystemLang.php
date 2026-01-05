@@ -23,10 +23,10 @@ class MySystemlang extends AdminMenu{
     function __construct(){
         parent::__construct('SystemLang');
         $this->initErrorSystemlang($this->getModelPage());
-        $this->LanguageName = $this->getModel2()[$this->getUrlName2()]['LanguageName'];
-        $this->LanguageValue = $this->getModel2()[$this->getUrlName2()]['LanguageValue'];
-        $this->Text = $this->getModel2()[$this->getUrlName2()]['Text'];
-        $this->WordHint = $this->getModel2()[$this->getUrlName2()]['WordHint'];
+        $this->LanguageName = $this->getModelPage()['LanguageName'];
+        $this->LanguageValue = $this->getModelPage()['LanguageValue'];
+        $this->Text = $this->getModelPage()['Text'];
+        $this->WordHint = $this->getModelPage()['WordHint'];
         if(isset($_GET['lang']) && isset($_GET['table']) && isset($this->getObj()[$_GET['lang']][$_GET['table']]))
             $this->DataView = $this->getObj()[$_GET['lang']][$_GET['table']];
         else if(!(isset($_GET['lang']) && isset($_GET['table']))){

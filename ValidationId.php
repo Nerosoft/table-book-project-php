@@ -9,7 +9,7 @@ class ValidationId extends MessageError{
         parent::__construct($IdPage);
         $this->ToastMessage = $this->getModelPage()[$toastMessage];
         if(!isset($_POST['id']) || $_POST['id'] === '')
-            $this->setErrors($this->getModel2()[$this->getUrlName2()]['IdIsReq']);
+            $this->setErrors($this->getModelPage()['IdIsReq']);
         else if(
         $this->getSCRIPTFILENAME() === 'BranchChangePost' && $_POST['id'] !== $this->getFixedId() && !isset($this->getBranch()[$_POST['id']])||
         !isset($this->getBranch()[$_POST['id']]) && $this->getUrlName2() === 'Branches' && $this->getSCRIPTFILENAME() !== 'BranchChangePost'||
@@ -21,6 +21,6 @@ class ValidationId extends MessageError{
         $_POST['id'] === $this->getLanguage() && $this->getUrlName2() === 'ChangeLanguage'||
         !isset($this->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'Login'||
         !isset($this->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'Register')
-            $this->setErrors($this->getModel2()[$this->getUrlName2()]['IdIsInv']);
+            $this->setErrors($this->getModelPage()['IdIsInv']);
     }
 }

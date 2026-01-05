@@ -65,7 +65,7 @@ class MessageError extends ModelJson{
         if(!isset($_POST['Follow']) || $_POST['Follow'] === '')
             $this->setErrors($obj->getBranceRaysFollowRequired());
         else if(!isset($this->getModel2()['SelectBranchBox'][$_POST['Follow']]))
-            $this->setErrors($this->getModel2()[$this->getUrlName2()]['BranceRaysFollowValue']);
+            $this->setErrors($this->getModelPage()['BranceRaysFollowValue']);
     }
     function validChangeLanguage($obj){
         if(!isset($_POST['lang_name']) || $_POST['lang_name'] === '')

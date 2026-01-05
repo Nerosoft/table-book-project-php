@@ -4,7 +4,7 @@ class InformationPage extends ModelJson{
     private $Title;
     function __construct($IdPage){
         parent::__construct($IdPage);
-        $this->Title = $this->getModel2()[$this->getUrlName2()]['Title'];
+        $this->Title = $this->getModelPage()['Title'];
     }
     function getTitle(){
         return $this->Title;

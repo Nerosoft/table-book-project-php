@@ -12,12 +12,12 @@ class Page extends AdminMenu{
     private $LoadMessage;
     function __construct($IdPage){
         parent::__construct($IdPage);
-        $this->ScreenModelCreate = $this->getModel2()[$this->getUrlName2()]['ScreenModelCreate'];
-        $this->ButtonModelCreate = $this->getModel2()[$this->getUrlName2()]['ButtonModelCreate'];
-        $this->ButtonModelAdd = $this->getModel2()[$this->getUrlName2()]['ButtonModelAdd'];
-        $this->ScreenModelDelete = $this->getModel2()[$this->getUrlName2()]['ScreenModelDelete'];
-        $this->messageModelDelete = $this->getModel2()[$this->getUrlName2()]['MessageModelDelete'];
-        $this->buttonModelDelete = $this->getModel2()[$this->getUrlName2()]['ButtonModelDelete'];
+        $this->ScreenModelCreate = $this->getModelPage()['ScreenModelCreate'];
+        $this->ButtonModelCreate = $this->getModelPage()['ButtonModelCreate'];
+        $this->ButtonModelAdd = $this->getModelPage()['ButtonModelAdd'];
+        $this->ScreenModelDelete = $this->getModelPage()['ScreenModelDelete'];
+        $this->messageModelDelete = $this->getModelPage()['MessageModelDelete'];
+        $this->buttonModelDelete = $this->getModelPage()['ButtonModelDelete'];
     }
     function getScreenModelCreate(){
         return $this->ScreenModelCreate;

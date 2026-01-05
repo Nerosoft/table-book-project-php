@@ -17,16 +17,16 @@ class LoginRegister extends InformationPage{
     function __construct($IdPage){
         parent::__construct($IdPage);
         $this->initErrorsLoginRegister($this->getModelPage());
-        $this->TitleForm = $this->getModel2()[$this->getUrlName2()]['TitleForm'];
-        $this->LabelEmail = $this->getModel2()[$this->getUrlName2()]['LabelEmail'];
-        $this->HintEmail = $this->getModel2()[$this->getUrlName2()]['HintEmail'];
-        $this->LabelPassword = $this->getModel2()[$this->getUrlName2()]['LabelPassword'];
-        $this->HintPassword = $this->getModel2()[$this->getUrlName2()]['HintPassword'];
+        $this->TitleForm = $this->getModelPage()['TitleForm'];
+        $this->LabelEmail = $this->getModelPage()['LabelEmail'];
+        $this->HintEmail = $this->getModelPage()['HintEmail'];
+        $this->LabelPassword = $this->getModelPage()['LabelPassword'];
+        $this->HintPassword = $this->getModelPage()['HintPassword'];
         $this->MyLanguage = MyLanguage::fromArray($this->getModel2()['AllNamesLanguage']);
-        $this->ButtonName = $this->getModel2()[$this->getUrlName2()]['ButtonName'];
-        $this->ChangeLanguageButton = $this->getModel2()[$this->getUrlName2()]['ChangeLanguageButton'];
-        $this->ModelTitle = $this->getModel2()[$this->getUrlName2()]['ModelTitle'];
-        $this->ModelButton = $this->getModel2()[$this->getUrlName2()]['ModelButton'];
+        $this->ButtonName = $this->getModelPage()['ButtonName'];
+        $this->ChangeLanguageButton = $this->getModelPage()['ChangeLanguageButton'];
+        $this->ModelTitle = $this->getModelPage()['ModelTitle'];
+        $this->ModelButton = $this->getModelPage()['ModelButton'];
     }
     function getChangeLanguageButton(){
         return $this->ChangeLanguageButton;

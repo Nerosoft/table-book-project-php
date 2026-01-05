@@ -30,7 +30,7 @@ class ValidationLoginRegister extends MessageError{
     }
     function getEmailExist(){
         if(isset($_POST['Email']) && in_array($_POST['Email'], array_map(function($obj) {return $obj->getEmail();}, $this->getUsers())))
-            $this->setErrors($this->getModel2()[$this->getUrlName2()]['EmailExist']);
+            $this->setErrors($this->getModelPage()['EmailExist']);
     }
 }
 ?>

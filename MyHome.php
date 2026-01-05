@@ -17,11 +17,11 @@ class MyHome extends Page{
     function __construct(){
         parent::__construct('Home');
         $this->initErrorsHome($this->getModelPage());
-        $this->TableName = $this->getModel2()[$this->getUrlName2()]['NameTable'];
-        $this->LabelName = $this->getModel2()[$this->getUrlName2()]['LabelName'];
-        $this->HintName = $this->getModel2()[$this->getUrlName2()]['HintName'];
-        $this->LabelInputNumber = $this->getModel2()[$this->getUrlName2()]['LabelInputNumber'];
-        $this->HintInputNumber = $this->getModel2()[$this->getUrlName2()]['HintInputNumber'];
+        $this->TableName = $this->getModelPage()['NameTable'];
+        $this->LabelName = $this->getModelPage()['LabelName'];
+        $this->HintName = $this->getModelPage()['HintName'];
+        $this->LabelInputNumber = $this->getModelPage()['LabelInputNumber'];
+        $this->HintInputNumber = $this->getModelPage()['HintInputNumber'];
         $this->DataView = isset($this->getModel2()['MyFlexTables'])?array_reverse(CustomTable::fromArray($this)):array();
     }
     function getMyDataView(){

@@ -10,10 +10,10 @@ class MyRegister extends LoginRegister{
     function __construct(){
         parent::__construct('Register');
         $this->initErrorsRegister($this->getModelPage());
-        $this->LabelConfirmPassword = $this->getModel2()[$this->getUrlName2()]['LabelConfirmPassword'];
-        $this->HintConfirmPassword = $this->getModel2()[$this->getUrlName2()]['HintConfirmPassword'];
-        $this->LabelKeyPassword = $this->getModel2()[$this->getUrlName2()]['LabelKeyPassword'];
-        $this->HintKeyPassword = $this->getModel2()[$this->getUrlName2()]['HintKeyPassword'];
+        $this->LabelConfirmPassword = $this->getModelPage()['LabelConfirmPassword'];
+        $this->HintConfirmPassword = $this->getModelPage()['HintConfirmPassword'];
+        $this->LabelKeyPassword = $this->getModelPage()['LabelKeyPassword'];
+        $this->HintKeyPassword = $this->getModelPage()['HintKeyPassword'];
     }
     function getLabelConfirmPassword(){
         return $this->LabelConfirmPassword;

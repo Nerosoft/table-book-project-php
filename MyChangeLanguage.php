@@ -33,12 +33,12 @@ class MyChangeLanguage extends Page{
     function __construct(){
         parent::__construct('ChangeLanguage');
         $this->initErrorChangelanguage($this->getModel2());
-        $this->LabelNameLanguage = $this->getModel2()[$this->getUrlName2()]['LabelCreateLanguage'];
-        $this->HintNewLangName = $this->getModel2()[$this->getUrlName2()]['HintNewLangName'];
-        $this->NameLangaue = $this->getModel2()[$this->getUrlName2()]['NameLangaue'];
-        $this->ButtonChangeLanguageMessage = $this->getModel2()[$this->getUrlName2()]['ButtonChangeLanguageMessage'];
-        $this->LabelChangeLanguageMessage = $this->getModel2()[$this->getUrlName2()]['LabelChangeLanguageMessage'];
-        $this->TitleChangeLanguageMessage = $this->getModel2()[$this->getUrlName2()]['TitleChangeLanguageMessage'];
+        $this->LabelNameLanguage = $this->getModelPage()['LabelCreateLanguage'];
+        $this->HintNewLangName = $this->getModelPage()['HintNewLangName'];
+        $this->NameLangaue = $this->getModelPage()['NameLangaue'];
+        $this->ButtonChangeLanguageMessage = $this->getModelPage()['ButtonChangeLanguageMessage'];
+        $this->LabelChangeLanguageMessage = $this->getModelPage()['LabelChangeLanguageMessage'];
+        $this->TitleChangeLanguageMessage = $this->getModelPage()['TitleChangeLanguageMessage'];
         $this->DataView =  array_reverse(MyLanguage::fromArray($this->getModel2()['AllNamesLanguage']));
     }
     function getMyDataView(){

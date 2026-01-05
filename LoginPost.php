@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                         $this->redirectToAdminPage();
                         exit;
                     }
-                $this->setErrors($this->getModel2()[$this->getUrlName2()]['EmailPassword']);
+                $this->setErrors($this->getModelPage()['EmailPassword']);
             }
         }
     }
