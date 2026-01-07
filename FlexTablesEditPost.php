@@ -2,7 +2,7 @@
 include 'SessionAdmin.php';
 require 'MyFlexTablesView.php';
 require 'ValidationId.php';
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['staticId'])){
+if($_SERVER["REQUEST_METHOD"] === "POST"){
 class FlexTablesEditPost extends ValidationId{
     use ErrorFlexTable;
     function __construct(){

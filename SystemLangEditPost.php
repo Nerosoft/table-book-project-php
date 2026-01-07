@@ -2,7 +2,7 @@
 include 'SessionAdmin.php';
 require 'MySystemlang.php';
 require 'MessageError.php';
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['staticId'])){
+if($_SERVER["REQUEST_METHOD"] === "POST"){
 class SystemLangEditPost extends MessageError{
     use ErrorSystemlang;
     private $ToastMessage;

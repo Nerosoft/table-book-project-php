@@ -2,7 +2,7 @@
 include 'SessionAdmin.php';
 require 'MyChangeLanguage.php';
 require 'MessageError.php';
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['staticId'])){
+if($_SERVER["REQUEST_METHOD"] === "POST"){
 class ChangeLanguageCreatePost extends MessageError{
     use ErrorChangelanguage;
     private $ToastMessage;

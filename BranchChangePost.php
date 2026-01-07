@@ -2,7 +2,7 @@
 include 'SessionAdmin.php';
 require 'MyBranch.php';
 require 'ValidationId.php';
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_SESSION['staticId'])){
+if($_SERVER["REQUEST_METHOD"] === "POST"){
 class BranchChangePost extends ValidationId{
     function __construct(){
         parent::__construct('Branches', 'SuccessfullyChangeBranch');
