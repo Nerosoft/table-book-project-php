@@ -170,7 +170,7 @@
                 "ScreenModelDelete": "Screen delete table",
                 "MessageModelDelete": "Do you want to delete table",
                 "ButtonModelDelete": "Delete table",
-                "Title": "Custom Table1",
+                "Title": "Custom Table",
                 "ScreenModelCreate": "Screen create table",
                 "ScreenModelEdit": "Screen edit table",
                 "ButtonModelCreate": "Create table",
@@ -269,7 +269,7 @@
                 "rtl": "set right to left direction",
                 "LoadMessage": "welcome in edit language",
                 "TableId": "ID",
-                "TabelEvent": "Action1",
+                "TabelEvent": "Action",
                 "ScreenModelEdit": "Screen edit all language",
                 "ButtonModelEdit": "Edit"
             }
@@ -447,7 +447,7 @@
                 "ScreenModelDelete": "Screen delete table",
                 "MessageModelDelete": "Do you want to delete table",
                 "ButtonModelDelete": "Delete table",
-                "Title": "Custom Table1",
+                "Title": "Custom Table",
                 "ScreenModelCreate": "Screen create table",
                 "ScreenModelEdit": "Screen edit table",
                 "ButtonModelCreate": "Create table",
@@ -546,47 +546,9 @@
                 "rtl": "set right to left direction",
                 "LoadMessage": "welcome in edit language",
                 "TableId": "ID",
-                "TabelEvent": "Action1",
+                "TabelEvent": "Action",
                 "ScreenModelEdit": "Screen edit all language",
                 "ButtonModelEdit": "Edit"
-            },
-            "MyFlexTables": {
-                "mP4aa53c": "facebook"
-            },
-            "mP4aa53c": {
-                "MYTITLE": "facebook",
-                "LoadMessage": "welcome in page table",
-                "ScreenModelDelete": "Screen delete table",
-                "MessageModelDelete": "Do you want to delete table",
-                "ButtonModelDelete": "Delete table",
-                "Title": "table",
-                "ScreenModelCreate": "Screen create table",
-                "ScreenModelEdit": "Screen edit table",
-                "ButtonModelCreate": "Create table",
-                "ButtonModelAdd": "Create table",
-                "ButtonModelEdit": "Edit table",
-                "TableId": "Id",
-                "TabelEvent": "Event",
-                "MessageModelCreate": "Seccessfully add table",
-                "MessageModelEdit": "Seccessfully edit table",
-                "Delete": "Seccessfully delete table",
-                "IdIsReq": "Id Required",
-                "IdIsInv": "Id Invalid",
-                "TableHead": {
-                    "um4aa559": "Name"
-                },
-                "Label": {
-                    "um4aa559": "Name"
-                },
-                "Hint": {
-                    "um4aa559": "Enter name value"
-                },
-                "ErrorsMessageReq": {
-                    "um4aa559": "error name reqired"
-                },
-                "ErrorsMessageInv": {
-                    "um4aa559": "error name invalid"
-                }
             }
         },
         "Users": {

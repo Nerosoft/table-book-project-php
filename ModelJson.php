@@ -48,7 +48,7 @@ class ModelJson{
     }
     function saveFile($file){
         $this->File = $file;
-        file_put_contents("data.json", json_encode($file, JSON_PRETTY_PRINT));
+        file_put_contents("data.json", json_encode($file, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
     function getObj(){
         return $this->File[$this->id];
@@ -61,7 +61,7 @@ class ModelJson{
     }
     function saveModel($data){
         $this->File[$this->id] = $data;
-        file_put_contents("data.json", json_encode($this->File, JSON_PRETTY_PRINT));
+        file_put_contents("data.json", json_encode($this->File, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
     function getFixedId(){
         return $this->FixedId;
