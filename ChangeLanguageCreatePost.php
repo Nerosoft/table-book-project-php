@@ -1,8 +1,8 @@
 <?php
 include 'SessionAdmin.php';
+if($_SERVER["REQUEST_METHOD"] === "POST"){
 require 'MyChangeLanguage.php';
 require 'MessageError.php';
-if($_SERVER["REQUEST_METHOD"] === "POST"){
 class ChangeLanguageCreatePost extends MessageError{
     use ErrorChangelanguage;
     private $ToastMessage;

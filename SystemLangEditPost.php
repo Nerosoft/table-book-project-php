@@ -1,8 +1,8 @@
 <?php
 include 'SessionAdmin.php';
+if($_SERVER["REQUEST_METHOD"] === "POST"){
 require 'MySystemlang.php';
 require 'MessageError.php';
-if($_SERVER["REQUEST_METHOD"] === "POST"){
 class SystemLangEditPost extends MessageError{
     use ErrorSystemlang;
     private $ToastMessage;

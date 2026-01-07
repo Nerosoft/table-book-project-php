@@ -1,8 +1,8 @@
 <?php
 include 'SessionAdmin.php';
+if($_SERVER["REQUEST_METHOD"] === "POST"){
 require 'MyBranch.php';
 require 'MessageError.php';
-if($_SERVER["REQUEST_METHOD"] === "POST"){
 class BranchCreatePost extends MessageError{
     use ErrorBranch;
     private $ToastMessage;

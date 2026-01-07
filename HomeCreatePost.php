@@ -1,8 +1,8 @@
 <?php
 include 'SessionAdmin.php';
+if($_SERVER["REQUEST_METHOD"] === "POST"){
 require 'MyHome.php';
 require 'MessageError.php';
-if($_SERVER["REQUEST_METHOD"] === "POST"){
 class HomeCreatePost extends MessageError{
     use ErrorsHome;
     private $ToastMessage;
