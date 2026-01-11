@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                 $this->redirectToAdminPage();
                 $allUsers = $this->getObj();
                 unset($_POST['superId'], $_POST['password_confirmation']);
-                $allUsers['Users'][$this->getRandomId()] = $_POST;
+                $allUsers['Users'][$this->getRandomId()] = array("Email"=>$_POST["Email"], "Password"=>$_POST["Password"], "Key"=>$_POST["Key"]);
                 $this->saveModel($allUsers);
                 exit;
             }

@@ -89,15 +89,17 @@ class MessageError extends ModelJson{
         $this->saveModel($myData);
     }
     function saveBranch($keyId, $file){
-        $file[$this->getFixedId()]['Branches'][$keyId]["Name"] = $_POST["Name"];
-        $file[$this->getFixedId()]['Branches'][$keyId]["Phone"] = $_POST["Phone"];
-        $file[$this->getFixedId()]['Branches'][$keyId]["Country"] = $_POST["Country"];
-        $file[$this->getFixedId()]['Branches'][$keyId]["Governments"] = $_POST["Governments"];
-        $file[$this->getFixedId()]['Branches'][$keyId]["City"] = $_POST["City"];
-        $file[$this->getFixedId()]['Branches'][$keyId]["Street"] = $_POST["Street"];
-        $file[$this->getFixedId()]['Branches'][$keyId]["Building"] = $_POST["Building"];
-        $file[$this->getFixedId()]['Branches'][$keyId]["Address"] = $_POST["Address"];
-        $file[$this->getFixedId()]['Branches'][$keyId]["Follow"] = $_POST["Follow"];
+        $file[$this->getFixedId()]['Branches'][$keyId] = array(
+            "Name"=>$_POST["Name"],
+            "Phone"=>$_POST["Phone"],
+            "Country"=>$_POST["Country"],
+            "Governments"=>$_POST["Governments"],
+            "City"=>$_POST["City"],
+            "Street"=>$_POST["Street"],
+            "Building"=>$_POST["Building"],
+            "Address"=>$_POST["Address"],
+            "Follow"=>$_POST["Follow"]
+        );
         $this->saveFile($file);
     }
     function saveLanguageDatabase($newKey, &$myData, $obj){
