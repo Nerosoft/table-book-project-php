@@ -1,7 +1,5 @@
 <?php
 require 'AdminMenu.php';
-//make home index page
-//dont save value = $_POST
 class Page extends AdminMenu{
     private $ScreenModelCreate;
     private $ButtonModelCreate;

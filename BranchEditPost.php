@@ -11,9 +11,7 @@ class BranchEditPost extends ValidationId{
         $this->ValidBranch($this);
         if($this->isEmptyErrors()){
             $file = $this->getFile();
-            $keyId = $_POST['id'];
-            unset($_POST['id']);
-            $this->saveBranch($keyId, $file);
+            $this->saveBranch($_POST['id'], $file);
         }
     }
 }
