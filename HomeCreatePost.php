@@ -34,7 +34,7 @@ class HomeCreatePost extends MessageError{
             $this->showToast($this->getModelPage()['MessageModelCreate']);
             include 'home_view.php';
         }else{
-            $view = MyHome::initView();
+            $view = new MyHome();
             $this->displayErrors();
             include 'home_view.php';
         }
