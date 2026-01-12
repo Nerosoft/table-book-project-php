@@ -1,4 +1,3 @@
-<?php include 'title_html.php';?>
 <div class="container">
     <div class="register">
         <form id='register' method='POST' action="RegisterPost.php">
@@ -24,7 +23,7 @@
                 oninvalid="handleInput(this, '<?php echo $view->getRequiredKeyPassword()?>', '<?php echo $view->getInvalidKeyPassword()?>')">
             </div>
         </form>
-        <?php include 'change_language_model.php';?>
+        <?php include 'buttons.php'?>
     </div>
 
 </div>

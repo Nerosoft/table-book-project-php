@@ -5,14 +5,9 @@ require 'MySystemlang.php';
 require 'MessageError.php';
 class SystemLangEditPost extends MessageError{
     use ErrorSystemlang;
-    private $ToastMessage;
-    function getToastMessage(){
-        return $this->ToastMessage;
-    }
     function __construct(){
         parent::__construct('SystemLang');
         $this->initErrorSystemlang($this->getModelPage());
-        $this->ToastMessage = $this->getModelPage()['AllLanguageEdit'];
         if(!isset($_POST['word']) || $_POST['word'] === '')
             $this->setErrors($this->getTextRequired());
         else if(!isset($_GET['lang']) || !isset($_GET['table']) || !isset($_GET['key']) || strlen($_POST['word']) < 3 || !isset($this->getObj()[$_GET['lang']][$_GET['table']][$_GET['key']]) && !isset($_GET['array']) || isset($_GET['array']) && !isset($this->getObj()[$_GET['lang']][$_GET['table']][$_GET['key']][$_GET['array']]))
@@ -24,11 +19,16 @@ class SystemLangEditPost extends MessageError{
             else
                 $file[$_GET['lang']][$_GET['table']][$_GET['key']] = $_POST['word'];
             $this->saveModel($file);
+            $view = new MySystemlang();
+            $this->showToast($this->getModelPage()['AllLanguageEdit']);
+            include 'SystemLang_view.php';
+        }else{
+            $view = new MySystemlang();
+            $this->displayErrors();
+            include 'SystemLang_view.php';
         }
     }
 }
-$view2 = new SystemLangEditPost();
-$view = new MySystemlang();
-include 'SystemLang_view.php';
+new SystemLangEditPost();
 }else
     header('LOCATION:SystemLang');

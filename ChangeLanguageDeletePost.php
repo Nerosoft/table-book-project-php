@@ -15,11 +15,16 @@ class ChangeLanguageDeletePost extends ValidationId{
                 if($key !== $_POST['id'])
                     unset($myData[$key]['AllNamesLanguage'][$_POST['id']]);
             $this->saveModel($myData);
+            $view = new MyChangeLanguage();
+            $this->showToast($this->getToastMessage());
+            include 'ChangeLanguage_view.php';
+        }else{
+            $view = new MyChangeLanguage();
+            $this->displayErrors();
+            include 'ChangeLanguage_view.php';
         }
     }
 }
-$view2 = new ChangeLanguageDeletePost();
-$view = new MyChangeLanguage();
-include 'ChangeLanguage_view.php';
+new ChangeLanguageDeletePost();
 }else
     header('LOCATION:ChangeLanguage');

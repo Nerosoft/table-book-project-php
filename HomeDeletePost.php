@@ -16,11 +16,16 @@ class HomeDeletePost extends ValidationId{
             if(isset($myData[$_POST['id']]))
                 unset($myData[$_POST['id']]);
             $this->saveModel($myData);
+            $view = new MyHome();
+            $this->showToast($this->getToastMessage());
+            include 'home_view.php';
+        }else{
+            $view = new MyHome();
+            $this->displayErrors();
+            include 'home_view.php';
         }
     }
 }
-$view2 = new HomeDeletePost();
-$view = new MyHome();
-include 'home_view.php';
+new HomeDeletePost();
 }else
     header('LOCATION:Home');

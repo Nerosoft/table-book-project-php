@@ -53,6 +53,7 @@ class AdminMenu extends InformationPage
             $this->myMenuApp = $this->getModel2()['Menu'];
             unset($this->myMenuApp['MyFlexTables']);
         }        
+        include 'admin_title.php';
     }
     public function getIconByKey($key){
         if($key === 'Home')

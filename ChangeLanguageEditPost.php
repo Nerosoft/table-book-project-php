@@ -14,12 +14,17 @@ class ChangeLanguageEditPost extends ValidationId{
             $myData = $this->getObj();
             $this->saveLanguageDatabase($newKey, $myData, $this);
             $this->saveModel($myData);
+            $view = new MyChangeLanguage();
+            $this->showToast($this->getToastMessage());
+            include 'ChangeLanguage_view.php';
+        }else{
+            $view = new MyChangeLanguage();
+            $this->displayErrors();
+            include 'ChangeLanguage_view.php';
         }
     }
 }
 
-$view2 = new ChangeLanguageEditPost();
-$view = new MyChangeLanguage();
-include 'ChangeLanguage_view.php';
+new ChangeLanguageEditPost();
 }else
     header('LOCATION:ChangeLanguage');

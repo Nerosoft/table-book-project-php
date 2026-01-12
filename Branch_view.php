@@ -1,4 +1,3 @@
-<?php include 'admin_title.php';?>
 </head>
 <body>
     <div class="start-page container">

@@ -9,14 +9,20 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['change_language']) && 
             parent::__construct($_POST['change_language'], 'ChangeLang');
             if(!isset($_POST['superId']) || !isset($this->getFile()[$_POST['superId']])){
                 $this->setErrors($this->getModelPage()['DbIdInv']);
-            }else if($this->isEmptyErrors()){
+            }
+            if($this->isEmptyErrors()){
                 setcookie($this->getId(), $_POST['id'], time()+2628000);
                 $_COOKIE[$this->getId()] = $_POST['id'];
+                $view = $_POST['change_language'] === 'Login'?new MyLogin():new MyRegister();
+                $this->showToast($this->getToastMessage());
+                include $_POST['change_language'] === 'Login'?'login_view.php':'register_view.php';
+            }else{
+                $view = $_POST['change_language'] === 'Login'?new MyLogin():new MyRegister();
+                $this->displayErrors();
+                include $_POST['change_language'] === 'Login'?'login_view.php':'register_view.php';
             }
         }
     }
-    $view2 = new ChangeLangPost();
-    $view = $_POST['change_language'] === 'Login'?new MyLogin():new MyRegister();
-    include $_POST['change_language'] === 'Login'?'login_view.php':'register_view.php';
+new ChangeLangPost();
 }else
     header('LOCATION:Login');

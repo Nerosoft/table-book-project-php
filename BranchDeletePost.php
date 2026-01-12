@@ -14,11 +14,16 @@ class BranchDeletePost extends ValidationId{
                 unset( $file[$this->getFixedId()]['Branches'][$_POST['id']]);
             unset($file[$_POST['id']]);
             $this->saveFile($file);
-        }
+            $view = new MyBranch();
+            $this->showToast($this->getToastMessage());
+            include 'Branch_view.php';
+        }else{
+            $view = new MyBranch();
+            $this->displayErrors();
+            include 'Branch_view.php';
+        }  
     }
 }
-$view2 = new BranchDeletePost();
-$view = new MyBranch();
-include 'Branch_view.php';
+new BranchDeletePost();
 }else
     header('LOCATION:Branches');

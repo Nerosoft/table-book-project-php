@@ -14,11 +14,16 @@ class HomeEditPost extends ValidationId{
             foreach ($this->getModel2()['AllNamesLanguage'] as $code => $value) 
                 $myData[$code]['MyFlexTables'][$_POST['id']] = $_POST['name'];
             $this->saveModel($myData);
+            $view = new MyHome();
+            $this->showToast($this->getToastMessage());
+            include 'home_view.php';
+        }else{
+            $view = new MyHome();
+            $this->displayErrors();
+            include 'home_view.php';
         }
     }
 }
-$view2 = new HomeEditPost();
-$view = new MyHome();
-include 'home_view.php';
+new HomeEditPost();
 }else
     header('LOCATION:Home');

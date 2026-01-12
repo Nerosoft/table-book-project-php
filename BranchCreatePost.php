@@ -5,13 +5,8 @@ require 'MyBranch.php';
 require 'MessageError.php';
 class BranchCreatePost extends MessageError{
     use ErrorBranch;
-    private $ToastMessage;
-    function getToastMessage(){
-        return $this->ToastMessage;
-    }
     function __construct(){
         parent::__construct('Branches');
-        $this->ToastMessage = $this->getModelPage()['MessageModelCreate'];
         $this->initErrorBranch($this->getModelPage());
         $this->ValidBranch($this);
         if($this->isEmptyErrors()){
@@ -21,12 +16,17 @@ class BranchCreatePost extends MessageError{
             unset($obj['Branches'], $obj['Users']);
             $file [$keyId] = $obj;
             $this->saveBranch($keyId, $file);
-        }
+            $view = new MyBranch();
+            $this->showToast($this->getModelPage()['MessageModelCreate']);
+            include 'Branch_view.php';
+        }else{
+            $view = new MyBranch();
+            $this->displayErrors();
+            include 'Branch_view.php';
+        }  
     }
 }
 
-$view2 = new BranchCreatePost();
-$view = new MyBranch();
-include 'Branch_view.php';
+new BranchCreatePost();
 }else
     header('LOCATION:Branches');

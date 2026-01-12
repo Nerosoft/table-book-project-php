@@ -1,4 +1,4 @@
-<?php include 'my_id2.php'?>
+<?php echo '<input type="hidden" value="'.$view->getId().'"name="superId">';?>
 <h4><?php echo $view->getTitleForm()?></h4>
 <div class="form-group">
     <label for="email"><?php echo $view->getLabelEmail()?></label>

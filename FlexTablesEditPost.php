@@ -9,12 +9,18 @@ class FlexTablesEditPost extends ValidationId{
         parent::__construct($_GET['id'], 'MessageModelEdit');
         $this->initErrorFlexTable($this->getModelPage());
         $this->validFlexTable();
-        if($this->isEmptyErrors())
+        if($this->isEmptyErrors()){
             $this->saveFlexDataBase($_POST['id']);
+            $view = new MyFlexTablesView();
+            $this->showToast($this->getToastMessage());
+            include 'FlexTables_view.php';
+        }else{
+            $view = new MyFlexTablesView();
+            $this->displayErrors();
+            include 'FlexTables_view.php';
+        }
     }
 }
-$view2 = new FlexTablesEditPost();
-$view = new MyFlexTablesView();
-include 'FlexTables_view.php';
+new FlexTablesEditPost();
 }else
     header('LOCATION:Home');

@@ -12,12 +12,16 @@ class BranchEditPost extends ValidationId{
         if($this->isEmptyErrors()){
             $file = $this->getFile();
             $this->saveBranch($_POST['id'], $file);
-        }
+            $view = new MyBranch();
+            $this->showToast($this->getToastMessage());
+            include 'Branch_view.php';
+        }else{
+            $view = new MyBranch();
+            $this->displayErrors();
+            include 'Branch_view.php';
+        }  
     }
 }
-
-$view2 = new BranchEditPost();
-$view = new MyBranch();
-include 'Branch_view.php';
+new BranchEditPost();
 }else
     header('LOCATION:Branches');

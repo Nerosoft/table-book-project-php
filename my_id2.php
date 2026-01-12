@@ -1,1 +1,0 @@
-<input type="hidden" value="<?php echo $view->getId()?>" name="superId">

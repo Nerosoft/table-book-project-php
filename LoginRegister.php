@@ -27,6 +27,8 @@ class LoginRegister extends InformationPage{
         $this->ChangeLanguageButton = $this->getModelPage()['ChangeLanguageButton'];
         $this->ModelTitle = $this->getModelPage()['ModelTitle'];
         $this->ModelButton = $this->getModelPage()['ModelButton'];
+        include 'title_html.php';
+        include 'change_language_model.php';
     }
     function getChangeLanguageButton(){
         return $this->ChangeLanguageButton;

@@ -5,14 +5,9 @@ require 'MyChangeLanguage.php';
 require 'MessageError.php';
 class ChangeLanguageCreatePost extends MessageError{
     use ErrorChangelanguage;
-    private $ToastMessage;
-    function getToastMessage(){
-        return $this->ToastMessage;
-    }
     function __construct(){
         parent::__construct('ChangeLanguage');
         $this->initErrorChangelanguage($this->getModel2());
-        $this->ToastMessage = $this->getModelPage()['MessageModelCreate'];
         $this->validChangeLanguage($this);
         if($this->isEmptyErrors()){
             $newKey = $this->getRandomId();
@@ -26,12 +21,17 @@ class ChangeLanguageCreatePost extends MessageError{
                     $myData[$newKey][$key] = $myData[$this->getLanguage()][$key];   
                 }  
             $this->saveModel($myData);
+            $view = new MyChangeLanguage();
+            $this->showToast($this->getModelPage()['MessageModelCreate']);
+            include 'ChangeLanguage_view.php';
+        }else{
+            $view = new MyChangeLanguage();
+            $this->displayErrors();
+            include 'ChangeLanguage_view.php';
         }
     }
 }
 
-$view2 = new ChangeLanguageCreatePost();
-$view = new MyChangeLanguage();
-include 'ChangeLanguage_view.php';
+new ChangeLanguageCreatePost();
 }else
     header('LOCATION:ChangeLanguage');

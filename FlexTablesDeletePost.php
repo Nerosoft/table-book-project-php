@@ -13,11 +13,16 @@ class FlexTablesDeletePost extends ValidationId{
             else
                 unset($myData[$_GET['id']][$_POST['id']]);
             $this->saveModel($myData);
+            $view = new MyFlexTablesView();
+            $this->showToast($this->getToastMessage());
+            include 'FlexTables_view.php';
+        }else{
+            $view = new MyFlexTablesView();
+            $this->displayErrors();
+            include 'FlexTables_view.php';
         }
     }
 }
-$view2 = new FlexTablesDeletePost();
-$view = new MyFlexTablesView();
-include 'FlexTables_view.php';
+new FlexTablesDeletePost();
 }else
     header('LOCATION:Home');

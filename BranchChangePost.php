@@ -6,12 +6,18 @@ require 'ValidationId.php';
 class BranchChangePost extends ValidationId{
     function __construct(){
         parent::__construct('Branches', 'SuccessfullyChangeBranch');
-        if($this->isEmptyErrors())
+        if($this->isEmptyErrors()){
             $this->resetId();
+            $view = new MyBranch();
+            $this->showToast($this->getToastMessage());
+            include 'Branch_view.php';
+        }else{
+            $view = new MyBranch();
+            $this->displayErrors();
+            include 'Branch_view.php';
+        }  
     }
 }
-$view2 = new BranchChangePost();
-$view = new MyBranch();
-include 'Branch_view.php';
+new BranchChangePost();
 }else
     header('LOCATION:Branches');

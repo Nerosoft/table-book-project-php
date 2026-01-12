@@ -5,20 +5,15 @@ require 'MyHome.php';
 require 'MessageError.php';
 class HomeCreatePost extends MessageError{
     use ErrorsHome;
-    private $ToastMessage;
-    function getToastMessage(){
-        return $this->ToastMessage;
-    }
     function __construct(){
         parent::__construct('Home');
         $this->initErrorsHome($this->getModelPage());
-        $this->ToastMessage = $this->getModelPage()['MessageModelCreate'];
         $this->validCustomTable($this);
         if(!isset($_POST['input_number']) || $_POST['input_number'] === '')
             $this->setErrors($this->getInputNumberTableIsReq());
         else if($_POST['input_number'] > 8)
             $this->setErrors($this->getInputNumberTableIsInv());
-        else if($this->isEmptyErrors()){
+        if($this->isEmptyErrors()){
             $key = $this->getRandomId();
             $myData = $this->getObj();
             foreach ($this->getModel2()['AllNamesLanguage'] as $code => $value) {
@@ -35,12 +30,17 @@ class HomeCreatePost extends MessageError{
                 }
             }
             $this->saveModel($myData);
+            $view = new MyHome();
+            $this->showToast($this->getModelPage()['MessageModelCreate']);
+            include 'home_view.php';
+        }else{
+            $view = MyHome::initView();
+            $this->displayErrors();
+            include 'home_view.php';
         }
     }
 }
 
-$view2 = new HomeCreatePost();
-$view = new MyHome();
-include 'home_view.php';
+new HomeCreatePost();
 }else
     header('LOCATION:Home');

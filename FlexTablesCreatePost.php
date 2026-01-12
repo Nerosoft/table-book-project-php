@@ -5,21 +5,22 @@ require 'MyFlexTablesView.php';
 require 'MessageError.php';
 class FlexTablesCreatePost extends MessageError{
     use ErrorFlexTable;
-    private $ToastMessage;
-    function getToastMessage(){
-        return $this->ToastMessage;
-    }
     function __construct(){
         parent::__construct($_GET['id']);
         $this->initErrorFlexTable($this->getModelPage());
-        $this->ToastMessage = $this->getModelPage()['MessageModelCreate'];
         $this->validFlexTable();
-        if($this->isEmptyErrors())
+        if($this->isEmptyErrors()){
             $this->saveFlexDataBase($this->getRandomId());
+            $view = new MyFlexTablesView();
+            $this->showToast($this->getModelPage()['MessageModelCreate']);
+            include 'FlexTables_view.php';
+        }else{
+            $view = new MyFlexTablesView();
+            $this->displayErrors();
+            include 'FlexTables_view.php';
+        }
     }
 }
-$view2 = new FlexTablesCreatePost();
-$view = new MyFlexTablesView();
-include 'FlexTables_view.php';
+new FlexTablesCreatePost();
 }else
     header('LOCATION:Home');

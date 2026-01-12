@@ -5,6 +5,7 @@ class InformationPage extends ModelJson{
     function __construct($IdPage){
         parent::__construct($IdPage);
         $this->Title = $this->getModelPage()['Title'];
+        include 'start_html.php';
     }
     function getTitle(){
         return $this->Title;
