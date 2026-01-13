@@ -15,7 +15,8 @@ class ValidationId extends MessageError{
         !isset($this->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'ChangeLanguage'||
         $_POST['id'] === $this->getLanguage() && $this->getUrlName2() === 'ChangeLanguage'||
         !isset($this->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'Login'||
-        !isset($this->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'Register')
+        !isset($this->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'Register'||
+        !isset($this->getObj()['Users'][$_POST['id']]) && $this->getUrlName2() === 'SettingUsers')
             $this->setErrors($this->getModelPage()['IdIsInv']);
     }
 }

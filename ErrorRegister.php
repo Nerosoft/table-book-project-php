@@ -1,16 +1,15 @@
 <?php
+require 'ErrorsKeyPassword.php';
 trait ErrorRegister{
+    use ErrorsKeyPassword;
     private $RequiredConfirmPassword;
     private $InvalidConfirmPassword;
-    private $RequiredKeyPassword;
-    private $InvalidKeyPassword;
     private $PasswordDosNotMatch;
-    public function initErrorsRegister($page){
-        $this->RequiredConfirmPassword = $page['RequiredConfirmPassword'];
-        $this->InvalidConfirmPassword = $page['InvalidConfirmPassword'];
-        $this->RequiredKeyPassword = $page['RequiredKeyPassword'];
-        $this->InvalidKeyPassword = $page['InvalidKeyPassword'];
-        $this->PasswordDosNotMatch = $page['PasswordDosNotMatch'];
+    public function initErrorsRegister($error){
+        $this->initErrorsKeyPassword($error);
+        $this->RequiredConfirmPassword = $error['RequiredConfirmPassword'];
+        $this->InvalidConfirmPassword = $error['InvalidConfirmPassword'];
+        $this->PasswordDosNotMatch = $error['PasswordDosNotMatch'];
     }
     function getPasswordDosNotMatch(){
         return $this->PasswordDosNotMatch;
@@ -20,11 +19,5 @@ trait ErrorRegister{
     }
     function getInvalidConfirmPassword(){
         return $this->InvalidConfirmPassword;
-    }
-    function getRequiredKeyPassword(){
-        return $this->RequiredKeyPassword;
-    }
-    function getInvalidKeyPassword(){
-        return $this->InvalidKeyPassword;
     }
 }

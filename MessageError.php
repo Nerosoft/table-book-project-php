@@ -81,7 +81,29 @@ class MessageError extends ModelJson{
                 $this->setErrors($this->getErrorsMessageInv()[$key]);
         }
     }
+    function validUsers(){
+         if(!isset($_POST['Email']) || $_POST['Email'] === '')
+            $this->setErrors($this->getRequiredEmail());
+        else if(!preg_match('/^[\w]+@[\w]+\.[a-zA-z]{2,6}$/', $_POST['Email']))
+            $this->setErrors($this->getInvalidEmail());
+        else if(in_array($_POST['Email'], array_map(function($obj) {return $obj['Email'];}, $this->getObj()['Users'])) && $this->getSCRIPTFILENAME() === 'SettingUsersCreatePost' ||
+        in_array($_POST['Email'], array_map(function($obj) {return $obj['Email'];}, $this->getObj()['Users'])) && $this->getObj()['Users'][$_POST['id']]['Email'] !== $_POST['Email'] && $this->getSCRIPTFILENAME() === 'SettingUsersEditPost' )
+            $this->setErrors($this->getModelPage()['EmailExist']);
+        if(!isset($_POST['Password']) || $_POST['Password'] === '')
+            $this->setErrors($this->getRequiredPassword());
+        else if(strlen($_POST['Password']) < 8)
+            $this->setErrors($this->getInvalidPassword());
+        if(!isset($_POST['Key']) || $_POST['Key'] === '')
+            $this->setErrors($this->getRequiredKeyPassword());
+        else if(strlen($_POST['Key']) < 8)
+            $this->setErrors($this->getInvalidKeyPassword());
+    }
     //------------------------------------------------------------------
+    function saveUsers($keyId){
+        $myData = $this->getObj();
+        $myData['Users'][$keyId] = array("Email"=>$_POST["Email"], "Password"=>$_POST["Password"], "Key"=>$_POST["Key"]);
+        $this->saveModel($myData);
+    }
     function saveFlexDataBase($keyId){
         $myData = $this->getObj();
         foreach ($this->getErrorsMessageReq() as $key => $value)

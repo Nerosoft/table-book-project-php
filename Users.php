@@ -13,7 +13,7 @@ class Users
         $this->Password = $Password;
         $this->Key = $Key;
     }
-    function getEmail(){
+    function getName(){
         return $this->Email;
     }
     function getPassword(){

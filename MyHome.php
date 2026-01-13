@@ -4,10 +4,6 @@ require 'CustomTable.php';
 require 'ErrorsHome.php';
 class MyHome extends Page{
     use ErrorsHome;
-    private $ScreenModelCreate;
-    private $ButtonModelCreate;
-    private $ScreenModelEdit;
-    private $ButtonModelEdit;
     private $TableName;
     private $LabelName;
     private $HintName;
