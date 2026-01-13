@@ -14,8 +14,8 @@ class MyHome extends Page{
     private $LabelInputNumber;
     private $HintInputNumber;
     private $DataView;
-    function __construct(){
-        parent::__construct('Home');
+    function __construct($message = 'LoadMessage', $type = 'success'){
+        parent::__construct('Home', $message, $type);
         $this->initErrorsHome($this->getModelPage());
         $this->TableName = $this->getModelPage()['NameTable'];
         $this->LabelName = $this->getModelPage()['LabelName'];

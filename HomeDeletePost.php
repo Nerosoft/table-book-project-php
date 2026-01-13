@@ -5,7 +5,7 @@ require 'MyHome.php';
 require 'ValidationId.php';
 class HomeDeletePost extends ValidationId{
     function __construct(){
-        parent::__construct('Home', 'Delete');
+        parent::__construct('Home');
         if($this->isEmptyErrors()){
             $myData =  $this->getObj();
             foreach ($this->getModel2()['AllNamesLanguage'] as $key => $value) 
@@ -16,8 +16,7 @@ class HomeDeletePost extends ValidationId{
             if(isset($myData[$_POST['id']]))
                 unset($myData[$_POST['id']]);
             $this->saveModel($myData);
-            $view = new MyHome();
-            $this->showToast($this->getToastMessage());
+            $view = new MyHome('Delete');
             include 'home_view.php';
         }else{
             $view = new MyHome();

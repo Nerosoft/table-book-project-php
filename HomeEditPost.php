@@ -6,7 +6,7 @@ require 'ValidationId.php';
 class HomeEditPost extends ValidationId{
     use ErrorsHome;
     function __construct(){
-        parent::__construct('Home', 'MessageModelEdit');
+        parent::__construct('Home');
         $this->initErrorsHome($this->getModelPage());
         $this->validCustomTable($this);
         if($this->isEmptyErrors()){
@@ -14,8 +14,7 @@ class HomeEditPost extends ValidationId{
             foreach ($this->getModel2()['AllNamesLanguage'] as $code => $value) 
                 $myData[$code]['MyFlexTables'][$_POST['id']] = $_POST['name'];
             $this->saveModel($myData);
-            $view = new MyHome();
-            $this->showToast($this->getToastMessage());
+            $view = new MyHome('MessageModelEdit');
             include 'home_view.php';
         }else{
             $view = new MyHome();

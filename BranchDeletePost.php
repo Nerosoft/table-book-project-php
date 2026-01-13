@@ -5,7 +5,7 @@ require 'MyBranch.php';
 require 'ValidationId.php';
 class BranchDeletePost extends ValidationId{
     function __construct(){
-        parent::__construct('Branches', 'Delete');
+        parent::__construct('Branches');
         if($this->isEmptyErrors()){
             $file = $this->getFile();
             if(count($file[$this->getFixedId()]['Branches']) === 1)
@@ -14,8 +14,7 @@ class BranchDeletePost extends ValidationId{
                 unset( $file[$this->getFixedId()]['Branches'][$_POST['id']]);
             unset($file[$_POST['id']]);
             $this->saveFile($file);
-            $view = new MyBranch();
-            $this->showToast($this->getToastMessage());
+            $view = new MyBranch('Delete');
             include 'Branch_view.php';
         }else{
             $view = new MyBranch();

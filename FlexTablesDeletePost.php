@@ -5,7 +5,7 @@ require 'MyFlexTablesView.php';
 require 'ValidationId.php';
 class FlexTablesDeletePost extends ValidationId{
     function __construct(){
-        parent::__construct($_GET['id'], 'Delete');
+        parent::__construct($_GET['id']);
         if($this->isEmptyErrors()){
             $myData = $this->getObj();
             if(count($myData[$_GET['id']]) === 1)
@@ -13,8 +13,7 @@ class FlexTablesDeletePost extends ValidationId{
             else
                 unset($myData[$_GET['id']][$_POST['id']]);
             $this->saveModel($myData);
-            $view = new MyFlexTablesView();
-            $this->showToast($this->getToastMessage());
+            $view = new MyFlexTablesView('Delete');
             include 'FlexTables_view.php';
         }else{
             $view = new MyFlexTablesView();

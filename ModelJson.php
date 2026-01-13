@@ -38,8 +38,8 @@ class ModelJson{
     function getSCRIPTFILENAME(){
         return pathinfo($_SERVER['SCRIPT_FILENAME'])['filename'];
     }
-    function showCustomeMessage($callback){
-        echo'<div style="position: fixed; top: 0px; right: 10px; z-index: 9999; max-height: 90vh; overflow-y: auto;">';
+    function showCustomeMessage($callback, $top = '0'){
+        echo'<div style="position: fixed; top: '.$top.'; right: 10px; z-index: 9999; max-height: 90vh; overflow-y: auto;">';
         $callback();
         echo'</div>';
     }

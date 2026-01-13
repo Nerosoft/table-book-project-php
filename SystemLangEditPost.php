@@ -19,8 +19,7 @@ class SystemLangEditPost extends MessageError{
             else
                 $file[$_GET['lang']][$_GET['table']][$_GET['key']] = $_POST['word'];
             $this->saveModel($file);
-            $view = new MySystemlang();
-            $this->showToast($this->getModelPage()['AllLanguageEdit']);
+            $view = new MySystemlang('AllLanguageEdit');
             include 'SystemLang_view.php';
         }else{
             $view = new MySystemlang();

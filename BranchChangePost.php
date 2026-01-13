@@ -5,11 +5,10 @@ require 'MyBranch.php';
 require 'ValidationId.php';
 class BranchChangePost extends ValidationId{
     function __construct(){
-        parent::__construct('Branches', 'SuccessfullyChangeBranch');
+        parent::__construct('Branches');
         if($this->isEmptyErrors()){
             $this->resetId();
-            $view = new MyBranch();
-            $this->showToast($this->getToastMessage());
+            $view = new MyBranch('SuccessfullyChangeBranch');
             include 'Branch_view.php';
         }else{
             $view = new MyBranch();

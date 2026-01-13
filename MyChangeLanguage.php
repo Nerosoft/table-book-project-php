@@ -30,8 +30,8 @@ class MyChangeLanguage extends Page{
     function getLabelNameLanguage(){
         return $this->LabelNameLanguage;
     }
-    function __construct(){
-        parent::__construct('ChangeLanguage');
+    function __construct($message = 'LoadMessage', $type = 'success'){
+        parent::__construct('ChangeLanguage', $message, $type);
         $this->initErrorChangelanguage($this->getModel2());
         $this->LabelNameLanguage = $this->getModelPage()['LabelCreateLanguage'];
         $this->HintNewLangName = $this->getModelPage()['HintNewLangName'];

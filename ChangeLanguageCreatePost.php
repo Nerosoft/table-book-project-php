@@ -21,8 +21,7 @@ class ChangeLanguageCreatePost extends MessageError{
                     $myData[$newKey][$key] = $myData[$this->getLanguage()][$key];   
                 }  
             $this->saveModel($myData);
-            $view = new MyChangeLanguage();
-            $this->showToast($this->getModelPage()['MessageModelCreate']);
+            $view = new MyChangeLanguage('MessageModelCreate');
             include 'ChangeLanguage_view.php';
         }else{
             $view = new MyChangeLanguage();

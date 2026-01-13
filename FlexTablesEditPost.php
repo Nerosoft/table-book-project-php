@@ -6,13 +6,12 @@ require 'ValidationId.php';
 class FlexTablesEditPost extends ValidationId{
     use ErrorFlexTable;
     function __construct(){
-        parent::__construct($_GET['id'], 'MessageModelEdit');
+        parent::__construct($_GET['id']);
         $this->initErrorFlexTable($this->getModelPage());
         $this->validFlexTable();
         if($this->isEmptyErrors()){
             $this->saveFlexDataBase($_POST['id']);
-            $view = new MyFlexTablesView();
-            $this->showToast($this->getToastMessage());
+            $view = new MyFlexTablesView('MessageModelEdit');
             include 'FlexTables_view.php';
         }else{
             $view = new MyFlexTablesView();

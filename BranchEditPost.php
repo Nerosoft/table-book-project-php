@@ -6,14 +6,13 @@ require 'ValidationId.php';
 class BranchEditPost extends ValidationId{
     use ErrorBranch;
     function __construct(){
-        parent::__construct('Branches', 'MessageModelEdit');
+        parent::__construct('Branches');
         $this->initErrorBranch($this->getModelPage());
         $this->ValidBranch($this);
         if($this->isEmptyErrors()){
             $file = $this->getFile();
             $this->saveBranch($_POST['id'], $file);
-            $view = new MyBranch();
-            $this->showToast($this->getToastMessage());
+            $view = new MyBranch('MessageModelEdit');
             include 'Branch_view.php';
         }else{
             $view = new MyBranch();

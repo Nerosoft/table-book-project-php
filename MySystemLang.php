@@ -20,8 +20,8 @@ class MySystemlang extends AdminMenu{
     function getWordHint(){
         return $this->WordHint;
     }
-    function __construct(){
-        parent::__construct('SystemLang');
+    function __construct($message = 'LoadMessage', $type = 'success'){
+        parent::__construct('SystemLang', $message, $type);
         $this->initErrorSystemlang($this->getModelPage());
         $this->LanguageName = $this->getModelPage()['LanguageName'];
         $this->LanguageValue = $this->getModelPage()['LanguageValue'];

@@ -5,13 +5,12 @@ require 'MyChangeLanguage.php';
 require 'ValidationId.php';
 class ChangeLanguagePost extends ValidationId{
     function __construct(){
-        parent::__construct('ChangeLanguage', 'ChangeLang');
+        parent::__construct('ChangeLanguage');
         if($this->isEmptyErrors()){
             $myData = $this->getObj();
             $myData['Setting']['Language'] = $_POST['id'];
             $this->saveModel($myData);
-            $view = new MyChangeLanguage();
-            $this->showToast($this->getToastMessage());
+            $view = new MyChangeLanguage('ChangeLang');
             include 'ChangeLanguage_view.php';
         }else{
             $view = new MyChangeLanguage();

@@ -21,7 +21,7 @@ class MessageError extends ModelJson{
         $this->showCustomeMessage(function($type = 'danger'){
             foreach ($this->getErrors() as $key => $toast)
                 include 'toast_message.php'; 
-        });
+        }, '55px');
     }
     function validCustomTable($obj){
         if(!isset($_POST['name']) || $_POST['name'] === '')

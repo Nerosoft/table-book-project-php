@@ -1,13 +1,8 @@
 <?php
 require 'MessageError.php';
 class ValidationId extends MessageError{
-    private $ToastMessage;
-    function getToastMessage(){
-        return $this->ToastMessage;
-    }
-    function __construct($IdPage, $toastMessage){
+    function __construct($IdPage){
         parent::__construct($IdPage);
-        $this->ToastMessage = $this->getModelPage()[$toastMessage];
         if(!isset($_POST['id']) || $_POST['id'] === '')
             $this->setErrors($this->getModelPage()['IdIsReq']);
         else if(

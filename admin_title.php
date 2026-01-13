@@ -48,7 +48,7 @@
 <?php 
 foreach ($this->getMyMenuApp() as $key => $item) {
     if(is_array($item)){
-        $classActive = isset($_GET['lang']) && $_GET['lang'] === $key || $key === $this->getUrlName2() || $key === $this->getSCRIPTFILENAME()? 'my_active':'';
+        $classActive = isset($_GET['lang']) && $_GET['lang'] === $key || $key === $this->getUrlName2() || isset($_GET['id']) && $this->getUrlName2() === $_GET['id']? 'my_active':'';
         $name = array_shift($item);
         echo <<<HTML
             <li class="nav-item dropdown">

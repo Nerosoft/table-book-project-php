@@ -20,7 +20,7 @@ class AdminMenu extends InformationPage
     private $TableId;
     private $TabelEvent;
     private $mySelectBranch;
-    function __construct($IdPage){
+    function __construct($IdPage, $message, $type){
         parent::__construct($IdPage);
         $this->Ssearch = $this->getModel2()['TableInfo']['Ssearch'];
         $this->InfoEmpty = $this->getModel2()['TableInfo']['InfoEmpty'];
@@ -54,6 +54,7 @@ class AdminMenu extends InformationPage
             unset($this->myMenuApp['MyFlexTables']);
         }        
         include 'admin_title.php';
+        $this->showToast($this->getModelPage()[$message], $type);
     }
     public function getIconByKey($key){
         if($key === 'Home')

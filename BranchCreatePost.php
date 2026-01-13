@@ -16,8 +16,7 @@ class BranchCreatePost extends MessageError{
             unset($obj['Branches'], $obj['Users']);
             $file [$keyId] = $obj;
             $this->saveBranch($keyId, $file);
-            $view = new MyBranch();
-            $this->showToast($this->getModelPage()['MessageModelCreate']);
+            $view = new MyBranch('MessageModelCreate');
             include 'Branch_view.php';
         }else{
             $view = new MyBranch();

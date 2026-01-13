@@ -6,17 +6,21 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     class LoginPost extends ValidationLoginRegister{
         function __construct(){
             parent::__construct('Login');
-            $view = new MyLogin();
+            
             if($this->isEmptyErrors()){
                 foreach ($this->getUsers() as $key => $value)
                     if($value->getEmail() === $_POST['Email'] && $value->getPassword() === $_POST['Password']){
                         $this->redirectToAdminPage();
                         exit;
                     }
-                $this->showToast($this->getModelPage()['EmailPassword'], 'danger');
-            }else
+                    $view = new MyLogin('EmailPassword', 'danger');
+                    include 'login_view.php';
+
+            }else{
+                $view = new MyLogin();
                 $this->displayErrors();
-            include 'login_view.php';
+                include 'login_view.php';
+            }
         }
     }
     new LoginPost();

@@ -8,8 +8,8 @@ class Page extends AdminMenu{
     private $messageModelDelete;
     private $buttonModelDelete;
     private $LoadMessage;
-    function __construct($IdPage){
-        parent::__construct($IdPage);
+    function __construct($IdPage, $message, $type){
+        parent::__construct($IdPage, $message, $type);
         $this->ScreenModelCreate = $this->getModelPage()['ScreenModelCreate'];
         $this->ButtonModelCreate = $this->getModelPage()['ButtonModelCreate'];
         $this->ButtonModelAdd = $this->getModelPage()['ButtonModelAdd'];

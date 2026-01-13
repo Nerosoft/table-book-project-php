@@ -14,7 +14,7 @@ class LoginRegister extends InformationPage{
     private $ChangeLanguageButton;
     private $ModelTitle;
     private $ModelButton;
-    function __construct($IdPage){
+    function __construct($IdPage, $message, $type){
         parent::__construct($IdPage);
         $this->initErrorsLoginRegister($this->getModelPage());
         $this->TitleForm = $this->getModelPage()['TitleForm'];
@@ -28,6 +28,7 @@ class LoginRegister extends InformationPage{
         $this->ModelTitle = $this->getModelPage()['ModelTitle'];
         $this->ModelButton = $this->getModelPage()['ModelButton'];
         include 'title_html.php';
+        $this->showToast($this->getModelPage()[$message], $type);
         include 'change_language_model.php';
     }
     function getChangeLanguageButton(){

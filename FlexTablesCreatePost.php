@@ -11,8 +11,7 @@ class FlexTablesCreatePost extends MessageError{
         $this->validFlexTable();
         if($this->isEmptyErrors()){
             $this->saveFlexDataBase($this->getRandomId());
-            $view = new MyFlexTablesView();
-            $this->showToast($this->getModelPage()['MessageModelCreate']);
+            $view = new MyFlexTablesView('MessageModelCreate');
             include 'FlexTables_view.php';
         }else{
             $view = new MyFlexTablesView();

@@ -6,7 +6,7 @@ require 'ValidationId.php';
 class ChangeLanguageEditPost extends ValidationId{
     use ErrorChangelanguage;
     function __construct(){
-        parent::__construct('ChangeLanguage', 'MessageModelEdit');
+        parent::__construct('ChangeLanguage');
         $this->initErrorChangelanguage($this->getModel2());
         $this->validChangeLanguage($this);
         if($this->isEmptyErrors()){
@@ -14,8 +14,7 @@ class ChangeLanguageEditPost extends ValidationId{
             $myData = $this->getObj();
             $this->saveLanguageDatabase($newKey, $myData, $this);
             $this->saveModel($myData);
-            $view = new MyChangeLanguage();
-            $this->showToast($this->getToastMessage());
+            $view = new MyChangeLanguage('MessageModelEdit');
             include 'ChangeLanguage_view.php';
         }else{
             $view = new MyChangeLanguage();

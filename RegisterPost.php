@@ -7,7 +7,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         use ErrorRegister;
         function __construct(){
             parent::__construct('Register');
-            $view = new MyRegister();
             $this->initErrorsRegister($this->getModelPage());
             $this->getEmailExist();
             if(!isset($_POST['password_confirmation']) || $_POST['password_confirmation'] === '')
@@ -28,6 +27,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                 $this->saveModel($allUsers);
                 exit;
             }
+            $view = new MyRegister();
             $this->displayErrors();
             include 'register_view.php';
         }

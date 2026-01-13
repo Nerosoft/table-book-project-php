@@ -23,8 +23,8 @@ class MyBranch extends Page{
     private $BranchRaysAddress;
     private $selectBox1;
     private $DataView;
-    function __construct(){
-        parent::__construct('Branches');
+    function __construct($message = 'LoadMessage', $type = 'success'){
+        parent::__construct('Branches', $message, $type);
         $this->initErrorBranch($this->getModelPage());
         $this->branchInputOutput = $this->getModel2()['SelectBranchBox'];
         $this->BranchRaysName = $this->getModelPage()['BranchRaysName'];

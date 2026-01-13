@@ -9,8 +9,8 @@ class MyFlexTablesView extends Page{
     private $Label;
     private $Hint;
     private $DataView;
-    function __construct(){
-        parent::__construct($_GET['id']);
+    function __construct($message = 'LoadMessage', $type = 'success'){
+        parent::__construct($_GET['id'], $message, $type);
         $this->initErrorFlexTable($this->getModelPage());
         $this->TableHead = $this->getModelPage()['TableHead'];
         $this->Label = $this->getModelPage()['Label'];
