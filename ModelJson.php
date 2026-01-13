@@ -73,7 +73,7 @@ class ModelJson{
         $_SESSION['userId'] = $_POST['id'];
         $this->id = $_POST['id'];
     }
-    function showToast($toast, $type = 'success'){
+    function showToast($toast, $type){
         $this->showCustomeMessage(function()use($toast, $type){
             include 'toast_message.php';
         });
