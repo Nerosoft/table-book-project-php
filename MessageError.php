@@ -87,7 +87,7 @@ class MessageError extends ModelJson{
         else if(!preg_match('/^[\w]+@[\w]+\.[a-zA-z]{2,6}$/', $_POST['Email']))
             $this->setErrors($this->getInvalidEmail());
         else if(in_array($_POST['Email'], array_map(function($obj) {return $obj['Email'];}, $this->getObj()['Users'])) && $this->getSCRIPTFILENAME() === 'SettingUsersCreatePost' ||
-        in_array($_POST['Email'], array_map(function($obj) {return $obj['Email'];}, $this->getObj()['Users'])) && $this->getObj()['Users'][$_POST['id']]['Email'] !== $_POST['Email'] && $this->getSCRIPTFILENAME() === 'SettingUsersEditPost' )
+        isset($_POST['id']) && isset($this->getObj()['Users'][$_POST['id']]) && in_array($_POST['Email'], array_map(function($obj) {return $obj['Email'];}, $this->getObj()['Users'])) && $this->getObj()['Users'][$_POST['id']]['Email'] !== $_POST['Email'] && $this->getSCRIPTFILENAME() === 'SettingUsersEditPost' )
             $this->setErrors($this->getModelPage()['EmailExist']);
         if(!isset($_POST['Password']) || $_POST['Password'] === '')
             $this->setErrors($this->getRequiredPassword());
