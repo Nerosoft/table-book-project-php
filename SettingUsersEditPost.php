@@ -4,11 +4,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 require 'MySettingUsers.php';
 require 'ValidationId.php';
 class SettingUsersEditPost extends ValidationId{
-    use ErrorsEmailPassword, ErrorsKeyPassword;
+    use ErrorsPassword;
     function __construct(){
         parent::__construct('SettingUsers');
-        $this->initErrorsEmailPassword($this->getModelPage());
-        $this->initErrorsKeyPassword($this->getModelPage());
+        $this->initErrorsPassword($this->getModelPage());
         $this->validUsers();
         if($this->isEmptyErrors()){
             $this->saveUsers($_POST['id']);

@@ -181,6 +181,8 @@
             "Login": {
                 "MYTITLE": "Login",
                 "Title": "Login",
+                "ModalForgetPasswordTitle": "screen forget password",
+                "ModalForgetPasswordButton": "forget password",
                 "LoadMessage": "welcome in page login",
                 "DbIdInv": "invalid database id",
                 "TitleForm": "Login form",
@@ -201,7 +203,13 @@
                 "ChangeLang": "successfully change language",
                 "UsedLanguage": "language is used",
                 "IdIsReq": "Required id",
-                "IdIsInv": "invalid id"
+                "IdIsInv": "invalid id",
+                "RequiredKeyPassword": "Required Key Password",
+                "InvalidKeyPassword": "Invalid Key Password",
+                "LabelKeyPassword": "Key password",
+                "HintKeyPassword": "Enter key password",
+                "ForgetPasswordMessage": "successflly forget password your paswwrd is",
+                "ForgetPasswordMessageInvlid": "invalid key password or email"
             },
             "Home": {
                 "MYTITLE": "custom table",
@@ -497,6 +505,8 @@
             "Login": {
                 "MYTITLE": "Login",
                 "Title": "Login",
+                "ModalForgetPasswordTitle": "screen forget password",
+                "ModalForgetPasswordButton": "forget password",
                 "LoadMessage": "welcome in page login",
                 "DbIdInv": "invalid database id",
                 "TitleForm": "Login form",
@@ -517,7 +527,13 @@
                 "ChangeLang": "successfully change language",
                 "UsedLanguage": "language is used",
                 "IdIsReq": "Required id",
-                "IdIsInv": "invalid id"
+                "IdIsInv": "invalid id",
+                "RequiredKeyPassword": "Required Key Password",
+                "InvalidKeyPassword": "Invalid Key Password",
+                "LabelKeyPassword": "Key password",
+                "HintKeyPassword": "Enter key password",
+                "ForgetPasswordMessage": "successflly forget password your paswwrd is",
+                "ForgetPasswordMessageInvlid": "invalid key password or email"
             },
             "Home": {
                 "MYTITLE": "custom table",

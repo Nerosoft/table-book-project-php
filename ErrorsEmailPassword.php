@@ -2,13 +2,13 @@
 trait ErrorsEmailPassword{
     private $RequiredEmail;
     private $InvalidEmail;
-    private $RequiredPassword;
-    private $InvalidPassword;
+    private $RequiredKeyPassword;
+    private $InvalidKeyPassword;
     public function initErrorsEmailPassword($error){
         $this->RequiredEmail = $error['RequiredEmail'];
         $this->InvalidEmail = $error['InvalidEmail'];
-        $this->RequiredPassword = $error['RequiredPassword'];
-        $this->InvalidPassword = $error['InvalidPassword'];
+        $this->RequiredKeyPassword = $error['RequiredKeyPassword'];
+        $this->InvalidKeyPassword = $error['InvalidKeyPassword'];
     }
     function getRequiredEmail(){
         return $this->RequiredEmail;
@@ -16,10 +16,10 @@ trait ErrorsEmailPassword{
     function getInvalidEmail(){
         return $this->InvalidEmail;
     }
-    function getRequiredPassword(){
-        return $this->RequiredPassword;
+    function getRequiredKeyPassword(){
+        return $this->RequiredKeyPassword;
     }
-    function getInvalidPassword(){
-        return $this->InvalidPassword;
+    function getInvalidKeyPassword(){
+        return $this->InvalidKeyPassword;
     }
 }

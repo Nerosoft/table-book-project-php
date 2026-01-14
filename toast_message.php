@@ -1,7 +1,7 @@
-<div id="<?php echo $key??'toastId'?>" class="toast text-bg-<?php echo$type??'success'?> mt-2">
+<div id="<?php echo $key?>" class="toast text-bg-<?php echo$type??'success'?> mt-2">
     <script>
         $(document).ready(function(){
-            (new bootstrap.Toast($('#<?php echo $key??'toastId'?>').on("hidden.bs.toast", function () {
+            (new bootstrap.Toast($('#<?php echo $key?>').on("hidden.bs.toast", function () {
             $(this).remove();
             }), { delay: 9000 })).show();
         });

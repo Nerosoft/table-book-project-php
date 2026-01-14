@@ -1,10 +1,9 @@
 <?php
 require 'page.php';
 require 'Users.php';
-require 'ErrorsEmailPassword.php';
-require 'ErrorsKeyPassword.php';
+require 'ErrorsPassword.php';
 class MySettingUsers extends page{
-    use ErrorsEmailPassword, ErrorsKeyPassword;
+    use ErrorsPassword;
     private $NameHeadTable;
     private $PasswordHeadTable;
     private $ForgetPasswordHeadTable;
@@ -17,8 +16,7 @@ class MySettingUsers extends page{
     private $DataView;
     function __construct($message = 'LoadMessage', $type = 'success'){
         parent::__construct('SettingUsers', $message, $type);
-        $this->initErrorsEmailPassword($this->getModelPage());
-        $this->initErrorsKeyPassword($this->getModelPage());
+        $this->initErrorsPassword($this->getModelPage());
         $this->NameHeadTable = $this->getModelPage()['NameHeadTable'];
         $this->PasswordHeadTable = $this->getModelPage()['PasswordHeadTable'];
         $this->ForgetPasswordHeadTable = $this->getModelPage()['ForgetPasswordHeadTable'];
@@ -28,7 +26,7 @@ class MySettingUsers extends page{
         $this->HintPassword = $this->getModelPage()['HintPassword'];
         $this->LabelForgetPassword = $this->getModelPage()['LabelForgetPassword'];
         $this->HintForgetPassword = $this->getModelPage()['HintForgetPassword'];
-        $this->DataView = isset($this->getObj()['Users']) ? Users::fromArray($this->getObj()['Users']):array();
+        $this->DataView = isset($this->getObj()['Users']) ? array_reverse(Users::fromArray($this->getObj()['Users'])):array();
     }
     function getMyDataView(){
         return $this->DataView;

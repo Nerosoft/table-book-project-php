@@ -38,7 +38,7 @@ class ModelJson{
     function getSCRIPTFILENAME(){
         return pathinfo($_SERVER['SCRIPT_FILENAME'])['filename'];
     }
-    function showCustomeMessage($callback, $top = '0'){
+    function showCustomeMessage($callback, $top){
         echo'<div style="position: fixed; top: '.$top.'; right: 10px; z-index: 9999; max-height: 90vh; overflow-y: auto;">';
         $callback();
         echo'</div>';
@@ -73,9 +73,9 @@ class ModelJson{
         $_SESSION['userId'] = $_POST['id'];
         $this->id = $_POST['id'];
     }
-    function showToast($toast, $type){
-        $this->showCustomeMessage(function()use($toast, $type){
+    function showToast($toast, $type, $key = 'toastId', $top = 0){
+        $this->showCustomeMessage(function()use($toast, $type, $key){
             include 'toast_message.php';
-        });
+        }, $top);
     }
 }

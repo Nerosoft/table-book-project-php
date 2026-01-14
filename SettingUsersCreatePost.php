@@ -4,11 +4,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 require 'MySettingUsers.php';
 require 'MessageError.php';
 class SettingUsersCreatePost extends MessageError{
-    use ErrorsEmailPassword, ErrorsKeyPassword;
+    use ErrorsPassword;
     function __construct(){
         parent::__construct('SettingUsers');
-        $this->initErrorsEmailPassword($this->getModelPage());
-        $this->initErrorsKeyPassword($this->getModelPage());
+        $this->initErrorsPassword($this->getModelPage());
         $this->validUsers();
         if($this->isEmptyErrors()){
             $this->saveUsers($this->getRandomId());
