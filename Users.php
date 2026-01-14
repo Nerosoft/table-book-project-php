@@ -1,5 +1,5 @@
 <?php
-class Users
+class Users implements DeleteInfoName
 {
     /**
      * Create a new class instance.

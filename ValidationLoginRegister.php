@@ -1,4 +1,5 @@
 <?php
+require 'DeleteInfoName.php';
 require 'Users.php';
 require 'MessageError.php';
 class ValidationLoginRegister extends MessageError{

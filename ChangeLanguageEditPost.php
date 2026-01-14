@@ -10,9 +10,8 @@ class ChangeLanguageEditPost extends ValidationId{
         $this->initErrorChangelanguage($this->getModel2());
         $this->validChangeLanguage($this);
         if($this->isEmptyErrors()){
-            $newKey = $_POST['id'];
             $myData = $this->getObj();
-            $this->saveLanguageDatabase($newKey, $myData, $this);
+            $this->saveLanguageDatabase($_POST['id'], $myData, $this);
             $this->saveModel($myData);
             $view = new MyChangeLanguage('MessageModelEdit');
             include 'ChangeLanguage_view.php';

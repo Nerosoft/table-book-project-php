@@ -13,7 +13,7 @@ class ValidationId extends MessageError{
         $this->getSCRIPTFILENAME() === 'FlexTablesEditPost' && !isset($this->getObj()[$_GET['id']][$_POST['id']]) ||
         $this->getSCRIPTFILENAME() === 'FlexTablesDeletePost' && !isset($this->getObj()[$_GET['id']][$_POST['id']]) ||
         !isset($this->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'ChangeLanguage'||
-        $_POST['id'] === $this->getLanguage() && $this->getUrlName2() === 'ChangeLanguage'||
+        $_POST['id'] === $this->getLanguage() && $this->getSCRIPTFILENAME() === 'ChangeLanguageDeletePost' && $this->getUrlName2() === 'ChangeLanguage'||
         !isset($this->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'Login'||
         !isset($this->getModel2()['AllNamesLanguage'][$_POST['id']]) && $this->getUrlName2() === 'Register'||
         !isset($this->getObj()['Users'][$_POST['id']]) && $this->getUrlName2() === 'SettingUsers')
