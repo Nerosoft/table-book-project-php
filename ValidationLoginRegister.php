@@ -10,8 +10,12 @@ class ValidationLoginRegister extends MessageError{
     }
     function redirectToAdminPage(){
         $_SESSION['userId'] = $_POST['superId'];
-        $_SESSION['staticId'] = $_POST['superId'];
-        header('Location:Home.php');
+        foreach ($this->getFile() as $key => $obj)
+            if($key === $_POST['superId'] || isset($obj['Branches']) && in_array($_POST['superId'], array_keys($obj['Branches']))){
+                $_SESSION['staticId'] = $key;
+                header('Location:Home.php');
+                return;
+            }
     }
     function __construct($IdPage){
         parent::__construct($IdPage);

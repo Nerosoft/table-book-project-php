@@ -148,6 +148,9 @@
             "Register": {
                 "MYTITLE": "Register",
                 "Title": "Register",
+                "AppLabel": "Select app",
+                "BranchLabel": "Select branch",
+                "AllBranch": "All branch",
                 "LoadMessage": "welcome in page Register",
                 "DbIdInv": "invalid database id",
                 "TitleForm": "Register form",
@@ -176,11 +179,15 @@
                 "UsedLanguage": "language is used",
                 "IdIsReq": "Required id",
                 "IdIsInv": "invalid id",
-                "EmailExist": "This email already exists."
+                "EmailExist": "This email already exists.",
+                "DbKeyLabel": "Select your database"
             },
             "Login": {
                 "MYTITLE": "Login",
                 "Title": "Login",
+                "AppLabel": "Select app",
+                "BranchLabel": "Select branch",
+                "AllBranch": "All branch",
                 "ModalForgetPasswordTitle": "screen forget password",
                 "ModalForgetPasswordButton": "forget password",
                 "LoadMessage": "welcome in page login",
@@ -209,7 +216,8 @@
                 "LabelKeyPassword": "Key password",
                 "HintKeyPassword": "Enter key password",
                 "ForgetPasswordMessage": "successflly forget password your paswwrd is",
-                "ForgetPasswordMessageInvlid": "invalid key password or email"
+                "ForgetPasswordMessageInvlid": "invalid key password or email",
+                "DbKeyLabel": "Select your database"
             },
             "Home": {
                 "MYTITLE": "custom table",
@@ -472,6 +480,9 @@
             "Register": {
                 "MYTITLE": "Register",
                 "Title": "Register",
+                "AppLabel": "Select app",
+                "BranchLabel": "Select branch",
+                "AllBranch": "All branch",
                 "LoadMessage": "welcome in page Register",
                 "DbIdInv": "invalid database id",
                 "TitleForm": "Register form",
@@ -500,11 +511,15 @@
                 "UsedLanguage": "language is used",
                 "IdIsReq": "Required id",
                 "IdIsInv": "invalid id",
-                "EmailExist": "This email already exists."
+                "EmailExist": "This email already exists.",
+                "DbKeyLabel": "Select your database"
             },
             "Login": {
                 "MYTITLE": "Login",
                 "Title": "Login",
+                "AppLabel": "Select app",
+                "BranchLabel": "Select branch",
+                "AllBranch": "All branch",
                 "ModalForgetPasswordTitle": "screen forget password",
                 "ModalForgetPasswordButton": "forget password",
                 "LoadMessage": "welcome in page login",
@@ -533,7 +548,8 @@
                 "LabelKeyPassword": "Key password",
                 "HintKeyPassword": "Enter key password",
                 "ForgetPasswordMessage": "successflly forget password your paswwrd is",
-                "ForgetPasswordMessageInvlid": "invalid key password or email"
+                "ForgetPasswordMessageInvlid": "invalid key password or email",
+                "DbKeyLabel": "Select your database"
             },
             "Home": {
                 "MYTITLE": "custom table",
