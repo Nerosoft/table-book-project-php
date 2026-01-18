@@ -1,20 +1,13 @@
 <?php
+require 'ErrorsHomeName.php';
 trait ErrorsHome{
-    private $NameTableIsReq;
-    private $NameTableIsInv;
+    use ErrorsHomeName;
     private $InputNumberTableIsReq;
     private $InputNumberTableIsInv;
-    function initErrorsHome($page){
-        $this->NameTableIsReq = $page['NameTableIsReq'];
-        $this->NameTableIsInv = $page['NameTableIsInv'];
-        $this->InputNumberTableIsReq = $page['InputNumberTableIsReq'];
-        $this->InputNumberTableIsInv = $page['InputNumberTableIsInv']; 
-    }
-    function getNameTableIsReq(){
-        return $this->NameTableIsReq;
-    }
-    function getNameTableIsInv(){
-        return $this->NameTableIsInv;
+    function initErrorsHome($error){
+        $this->initErrorsHomeName($error);
+        $this->InputNumberTableIsReq = $error['InputNumberTableIsReq'];
+        $this->InputNumberTableIsInv = $error['InputNumberTableIsInv']; 
     }
     function getInputNumberTableIsReq(){
         return $this->InputNumberTableIsReq;

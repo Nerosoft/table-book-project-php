@@ -13,7 +13,6 @@
         $idForm = "forgetpasswordform";
         include('start_model.php');
         echo '<input type="hidden" value="'.$view->getId().'"name="superId">';?>
-
         <div class="form-group">
             <label for="email"><?php echo $view->getLabelEmail()?></label>
             <input type="email" class="form-control" id="email" name="Email"
@@ -33,6 +32,26 @@
         </div>
         <?php include('end_model.php');?>
         <button onclick="openForm('#forgetpasswordmodal')" type="button" class="btn btn-primary" ><?php echo $view->getButtonForgetPassword()?></button>
+        <?php 
+        $title = $view->getModalTitleProject();
+        $button = $view->getModalButtonProject();
+        $action = 'SetupProject.php';
+        $idModel = "setupprojectmodal";
+        $idForm = "setupprojectform";
+        include('start_model.php');
+        echo '<input type="hidden" value="'.$view->getId().'"name="superId">
+        <input type="hidden" name="setup_project" value="'.$view->getUrlName2().'">'?>
+        <div class="form-group">
+            <label for="email"><?php echo $view->getNameLabel()?></label>
+            <input type="text" class="form-control" id="email" name="name"
+                placeholder="<?php echo $view->getNameHint()?>"
+                title="<?php echo $view->getNameHint()?>"
+                oninvalid="handleInput(this ,'<?php echo$view->getNameTableIsReq()?>', '<?php echo$view->getNameTableIsInv()?>')"
+                oninput="handleInput(this ,'<?php echo$view->getNameTableIsReq()?>', '<?php echo$view->getNameTableIsInv()?>')"
+                minlength="3"
+                required>
+        </div>
+        <?php include('end_model.php');?>
     </div>
 </div>
 </body>

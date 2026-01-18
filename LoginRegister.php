@@ -1,9 +1,10 @@
 <?php
 require 'InformationPage.php';
 require 'MyLanguage.php';
+require 'ErrorsHomeName.php';
 require 'ErrorLoginRegister.php';
 class LoginRegister extends InformationPage{
-    use ErrorLoginRegister;
+    use ErrorLoginRegister, ErrorsHomeName;
     private $TitleForm;
     private $LabelEmail;
     private $HintEmail;
@@ -21,6 +22,26 @@ class LoginRegister extends InformationPage{
     private $AppLabel;
     private $BranchLabel;
     private $AllBranch;
+    private $ModalTitleProject;
+    private $ModalButtonProject;
+    private $NameLabel;
+    private $NameHint;
+    private $ButtonSetupProject;
+    function getModalTitleProject(){
+        return $this->ModalTitleProject;
+    }
+    function getModalButtonProject(){
+        return $this->ModalButtonProject;
+    }
+    function getButtonSetupProject(){
+        return $this->ButtonSetupProject;
+    }
+    function getNameLabel(){
+        return $this->NameLabel;
+    }
+    function getNameHint(){
+        return $this->NameHint;
+    }
     function getAllBranch(){
         return $this->AllBranch;
     }
@@ -43,6 +64,7 @@ class LoginRegister extends InformationPage{
     function __construct($IdPage, $message, $type){
         parent::__construct($IdPage);
         $this->initErrorsLoginRegister($this->getModelPage());
+        $this->initErrorsHomeName($this->getModelPage());
         $this->TitleForm = $this->getModelPage()['TitleForm'];
         $this->LabelEmail = $this->getModelPage()['LabelEmail'];
         $this->HintEmail = $this->getModelPage()['HintEmail'];
@@ -57,6 +79,11 @@ class LoginRegister extends InformationPage{
         $this->AppLabel = $this->getModelPage()['AppLabel'];
         $this->BranchLabel = $this->getModelPage()['BranchLabel'];
         $this->AllBranch = $this->getModelPage()['AllBranch'];
+        $this->ModalTitleProject = $this->getModelPage()['ModalTitleProject'];
+        $this->ModalButtonProject = $this->getModelPage()['ModalButtonProject'];
+        $this->ButtonSetupProject = $this->getModelPage()['ButtonSetupProject'];
+        $this->NameLabel = $this->getModelPage()['NameLabel'];
+        $this->NameHint = $this->getModelPage()['NameHint'];
         foreach ($this->getFile() as $key => $obj)
             if(isset($obj['Branches'])){
                 $this->dbKeys[$key] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['AdminDashboard'];
@@ -65,6 +92,10 @@ class LoginRegister extends InformationPage{
                     $this->dbBranchKeys = $obj['Branches'];
                 }
                 $this->dbBranchKeys[$key]['Name'] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
+            }else if(isset($obj['State']) && $obj['State'] === 'admin'){
+                $this->dbKeys[$key] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['AdminDashboard'];
+                if($this->getId() === $key)
+                    $this->myIdBranch = $key;
             }
         include 'title_html.php';
         $this->showToast($this->getModelPage()[$message], $type);

@@ -13,7 +13,7 @@ class BranchCreatePost extends MessageError{
             $file = $this->getFile();
             $keyId = $this->getRandomId();
             $obj = $this->getFileByFixedId();
-            unset($obj['Branches'], $obj['Users']);
+            unset($obj['Branches'], $obj['Users'], $obj['State']);
             $file [$keyId] = $obj;
             $this->saveBranch($keyId, $file);
             $view = new MyBranch('MessageModelCreate');
