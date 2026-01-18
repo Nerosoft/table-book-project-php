@@ -90,10 +90,10 @@ class LoginRegister extends InformationPage{
                 if($this->getId() === $key || in_array($this->getId(), array_keys($obj['Branches'])) || isset($_GET['id']) && $_GET['id'] === $key || isset($_GET['id']) && in_array($_GET['id'], array_keys($obj['Branches']))){
                     $this->myIdBranch = $key;
                     $this->dbBranchKeys = $obj['Branches'];
+                    $this->dbBranchKeys[$key]['Name'] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
                 }
-                $this->dbBranchKeys[$key]['Name'] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
             }else if(isset($obj['State']) && $obj['State'] === 'admin'){
-                $this->dbKeys[$key] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['AdminDashboard'];
+                 $this->dbKeys[$key] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['AdminDashboard'];
                 if($this->getId() === $key)
                     $this->myIdBranch = $key;
             }
