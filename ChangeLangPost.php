@@ -7,9 +7,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['change_language']) && 
     class ChangeLangPost extends ValidationId{
         function __construct(){
             parent::__construct($_POST['change_language']);
-            if(!isset($_POST['superId']) || !isset($this->getFile()[$_POST['superId']])){
-                $this->setErrors($this->getModelPage()['DbIdInv']);
-            }
+            $this->validStaticId();
             if($this->isEmptyErrors()){
                 setcookie($this->getId(), $_POST['id'], time()+2628000);
                 $_COOKIE[$this->getId()] = $_POST['id'];

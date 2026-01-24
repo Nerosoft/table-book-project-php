@@ -3,11 +3,12 @@ include 'SessionAuth.php';
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['setup_project']) && $_POST['setup_project'] === 'Login' || $_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['setup_project']) && $_POST['setup_project'] === 'Register'){
     $_SERVER['SCRIPT_FILENAME'] = $_POST['setup_project'];
     require  $_POST['setup_project'] === 'Login'?'MyLogin.php':'MyRegister.php';
-    require 'ValidationStaticId.php';
-    class SetupProject extends ValidationStaticId{
+    require 'MessageError.php';
+    class SetupProject extends MessageError{
         use ErrorsHomeName;
         function __construct(){
             parent::__construct($_POST['setup_project']);
+            $this->validStaticId();
             $this->initErrorsHomeName($this->getModelPage());
             $this->validCustomTable($this);
             if($this->isEmptyErrors()){

@@ -98,6 +98,10 @@ class MessageError extends ModelJson{
         else if(strlen($_POST['Key']) < 8)
             $this->setErrors($this->getInvalidKeyPassword());
     }
+    function validStaticId(){
+        if(!isset($_POST['superId']) || !isset($this->getFile()[$_POST['superId']]))
+            $this->setErrors($this->getModelPage()['DbIdInv']);
+    }
     //------------------------------------------------------------------
     function saveUsers($keyId){
         $myData = $this->getObj();

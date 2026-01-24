@@ -1,8 +1,8 @@
 <?php
 require 'DeleteInfoName.php';
 require 'Users.php';
-require 'ValidationStaticId.php';
-class ValidationLoginRegister extends ValidationStaticId{
+require 'MessageError.php';
+class ValidationLoginRegister extends MessageError{
     use ErrorLoginRegister;
     private $users;
     function getUsers(){
@@ -19,6 +19,7 @@ class ValidationLoginRegister extends ValidationStaticId{
     }
     function __construct($IdPage){
         parent::__construct($IdPage);
+        $this->validStaticId();
         $this->initErrorsLoginRegister($this->getModelPage());
         $this->users = isset($this->getObj()['Users']) ? Users::fromArray($this->getObj()['Users']):array();
         if(!isset($_POST['Email']) || $_POST['Email'] === '')
