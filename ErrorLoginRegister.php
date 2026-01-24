@@ -1,10 +1,12 @@
 <?php
 require 'ErrorsPassword.php';
+require 'ErrorsHomeName.php';
 trait ErrorLoginRegister{
-    use ErrorsPassword;
+    use ErrorsPassword, ErrorsHomeName;
     private $ChangeLang;
-    public function initErrorsLoginRegister($error){
+    function initErrorsLoginRegister($error){
         $this->initErrorsPassword($error);
+        $this->initErrorsHomeName($error);
         $this->ChangeLang = $error['UsedLanguage'];
     }
     function getChangeLang(){
