@@ -12,10 +12,10 @@ class ModelJson{
         if(isset($_SESSION['userId'])){
             $this->id = $_SESSION['userId'];
             $this->FixedId = $_SESSION['staticId'];
-        }else if(isset($_GET['id']) && isset($this->File[$_GET['id']]))
-            $this->id = $_GET['id'];
-        else if(isset($_POST['superId']) && isset($this->File[$_POST['superId']]))
+        }else if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['superId']) && isset($this->File[$_POST['superId']]))
             $this->id = $_POST['superId'];
+        else if(isset($_GET['id']) && isset($this->File[$_GET['id']]))
+            $this->id = $_GET['id'];
         else
             $this->id = 'admin';
         $this->Language = isset($_COOKIE[$this->getId()]) && isset($this->getObj()[$_COOKIE[$this->getId()]]) && !isset($_SESSION['staticId'])?$_COOKIE[$this->getId()]:$this->getObj()['Setting']['Language'];
