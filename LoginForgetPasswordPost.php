@@ -15,8 +15,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             parent::__construct('Login');
             $this->initErrorsEmailPassword($this->getModelPage());
             $this->users = isset($this->getObj()['Users']) ? Users::fromArray($this->getObj()['Users']):array();
-            if(!isset($_POST['superId']) || !isset($this->getFile()[$_POST['superId']]))
-                $this->setErrors($this->getModelPage()['DbIdInv']);
+            $this->validStaticId();
             if(!isset($_POST['Email']) || $_POST['Email'] === '')
                 $this->setErrors($this->getRequiredEmail());
             else if(!preg_match('/^[\w]+@[\w]+\.[a-zA-z]{2,6}$/', $_POST['Email']) || !in_array($_POST['Email'], array_map(function($obj) {return $obj->getName();}, $this->getUsers())))
