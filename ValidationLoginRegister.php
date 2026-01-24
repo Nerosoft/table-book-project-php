@@ -1,8 +1,8 @@
 <?php
 require 'DeleteInfoName.php';
 require 'Users.php';
-require 'MessageError.php';
-class ValidationLoginRegister extends MessageError{
+require 'ValidationStaticId.php';
+class ValidationLoginRegister extends ValidationStaticId{
     use ErrorLoginRegister;
     private $users;
     function getUsers(){
@@ -14,16 +14,13 @@ class ValidationLoginRegister extends MessageError{
             if($key === $_POST['superId'] || isset($obj['Branches']) && in_array($_POST['superId'], array_keys($obj['Branches']))){
                 $_SESSION['staticId'] = $key;
                 header('Location:Home.php');
-                return;
+                exit;
             }
     }
     function __construct($IdPage){
         parent::__construct($IdPage);
         $this->initErrorsLoginRegister($this->getModelPage());
         $this->users = isset($this->getObj()['Users']) ? Users::fromArray($this->getObj()['Users']):array();
-        if(!isset($_POST['superId']) || !isset($this->getFile()[$_POST['superId']])){
-            $this->setErrors($this->getModelPage()['DbIdInv']);
-        }
         if(!isset($_POST['Email']) || $_POST['Email'] === '')
             $this->setErrors($this->getRequiredEmail());
         else if(!preg_match('/^[\w]+@[\w]+\.[a-zA-z]{2,6}$/', $_POST['Email']))

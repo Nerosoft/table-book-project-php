@@ -3,14 +3,12 @@ include 'SessionAuth.php';
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['setup_project']) && $_POST['setup_project'] === 'Login' || $_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['setup_project']) && $_POST['setup_project'] === 'Register'){
     $_SERVER['SCRIPT_FILENAME'] = $_POST['setup_project'];
     require  $_POST['setup_project'] === 'Login'?'MyLogin.php':'MyRegister.php';
-    require 'MessageError.php';
-    class SetupProject extends MessageError{
+    require 'ValidationStaticId.php';
+    class SetupProject extends ValidationStaticId{
         use ErrorsHomeName;
         function __construct(){
             parent::__construct($_POST['setup_project']);
             $this->initErrorsHomeName($this->getModelPage());
-            if(!isset($_POST['superId']) || !isset($this->getFile()[$_POST['superId']]))
-                $this->setErrors($this->getModelPage()['DbIdInv']);
             $this->validCustomTable($this);
             if($this->isEmptyErrors()){
                 $file = $this->getFile();

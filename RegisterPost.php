@@ -20,12 +20,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             else if(strlen($_POST['Key']) < 8)
                 $this->setErrors($this->getInvalidKeyPassword());
             else if($this->isEmptyErrors()){
-                $this->redirectToAdminPage();
                 $allUsers = $this->getObj();
-                unset($_POST['superId'], $_POST['password_confirmation']);
                 $allUsers['Users'][$this->getRandomId()] = array("Email"=>$_POST["Email"], "Password"=>$_POST["Password"], "Key"=>$_POST["Key"]);
                 $this->saveModel($allUsers);
-                exit;
+                $this->redirectToAdminPage();
             }
             $view = new MyRegister();
             $this->displayErrors();

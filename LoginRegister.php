@@ -85,17 +85,15 @@ class LoginRegister extends InformationPage{
         $this->NameLabel = $this->getModelPage()['NameLabel'];
         $this->NameHint = $this->getModelPage()['NameHint'];
         foreach ($this->getFile() as $key => $obj)
-            if(isset($obj['Branches'])){
+            if(isset($obj['State']) && $obj['State'] === 'admin'){
                 $this->dbKeys[$key] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['AdminDashboard'];
-                if($this->getId() === $key || in_array($this->getId(), array_keys($obj['Branches'])) || isset($_GET['id']) && $_GET['id'] === $key || isset($_GET['id']) && in_array($_GET['id'], array_keys($obj['Branches']))){
+                if($this->getId() === $key || isset($obj['Branches']) && in_array($this->getId(), array_keys($obj['Branches'])) || isset($_GET['id']) && $_GET['id'] === $key || isset($obj['Branches']) && isset($_GET['id']) && in_array($_GET['id'], array_keys($obj['Branches']))){
                     $this->myIdBranch = $key;
-                    $this->dbBranchKeys = $obj['Branches'];
                     $this->dbBranchKeys[$key]['Name'] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
+                    if(isset($obj['Branches']))
+                        $this->dbBranchKeys = $this->dbBranchKeys + $obj['Branches'];
+                    
                 }
-            }else if(isset($obj['State']) && $obj['State'] === 'admin'){
-                 $this->dbKeys[$key] = $obj[$obj['Setting']['Language']]['AppSettingAdmin']['AdminDashboard'];
-                if($this->getId() === $key)
-                    $this->myIdBranch = $key;
             }
         include 'title_html.php';
         $this->showToast($this->getModelPage()[$message], $type);

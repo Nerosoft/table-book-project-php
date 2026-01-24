@@ -9,10 +9,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             
             if($this->isEmptyErrors()){
                 foreach ($this->getUsers() as $key => $value)
-                    if($value->getName() === $_POST['Email'] && $value->getPassword() === $_POST['Password']){
+                    if($value->getName() === $_POST['Email'] && $value->getPassword() === $_POST['Password'])
                         $this->redirectToAdminPage();
-                        exit;
-                    }
                     $view = new MyLogin('EmailPassword', 'danger');
                     include 'login_view.php';
 
