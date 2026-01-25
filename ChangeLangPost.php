@@ -12,12 +12,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['change_language']) && 
                 setcookie($this->getId(), $_POST['id'], time()+2628000);
                 $_COOKIE[$this->getId()] = $_POST['id'];
                 $view = $_POST['change_language'] === 'Login'?new MyLogin('ChangeLang'):new MyRegister('ChangeLang');
-                include $_POST['change_language'] === 'Login'?'login_view.php':'register_view.php';
             }else{
                 $view = $_POST['change_language'] === 'Login'?new MyLogin():new MyRegister();
                 $this->displayErrors();
-                include $_POST['change_language'] === 'Login'?'login_view.php':'register_view.php';
             }
+            include $_POST['change_language'] === 'Login'?'login_view.php':'register_view.php';
         }
     }
 new ChangeLangPost();

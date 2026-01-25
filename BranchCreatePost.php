@@ -17,12 +17,11 @@ class BranchCreatePost extends MessageError{
             $file [$keyId] = $obj;
             $this->saveBranch($keyId, $file);
             $view = new MyBranch('MessageModelCreate');
-            include 'Branch_view.php';
         }else{
             $view = new MyBranch();
             $this->displayErrors();
-            include 'Branch_view.php';
         }  
+        include 'Branch_view.php';
     }
 }
 

@@ -15,12 +15,11 @@ class BranchDeletePost extends ValidationId{
             unset($file[$_POST['id']]);
             $this->saveFile($file);
             $view = new MyBranch('Delete');
-            include 'Branch_view.php';
         }else{
             $view = new MyBranch();
             $this->displayErrors();
-            include 'Branch_view.php';
-        }  
+        }
+        include 'Branch_view.php';
     }
 }
 new BranchDeletePost();

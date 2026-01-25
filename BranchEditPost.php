@@ -13,12 +13,11 @@ class BranchEditPost extends ValidationId{
             $file = $this->getFile();
             $this->saveBranch($_POST['id'], $file);
             $view = new MyBranch('MessageModelEdit');
-            include 'Branch_view.php';
         }else{
             $view = new MyBranch();
             $this->displayErrors();
-            include 'Branch_view.php';
-        }  
+        }
+        include 'Branch_view.php';
     }
 }
 new BranchEditPost();

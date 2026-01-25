@@ -12,12 +12,11 @@ class SettingUsersCreatePost extends MessageError{
         if($this->isEmptyErrors()){
             $this->saveUsers($this->getRandomId());
             $view = new MySettingUsers('MessageModelCreate');
-            include 'SettingUsers_view.php';
         }else{
             $view = new MySettingUsers();
             $this->displayErrors();
-            include 'SettingUsers_view.php';
         }
+        include 'SettingUsers_view.php';
     }
 }
 

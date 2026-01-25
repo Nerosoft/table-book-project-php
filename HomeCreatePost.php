@@ -31,12 +31,11 @@ class HomeCreatePost extends MessageError{
             }
             $this->saveModel($myData);
             $view = new MyHome('MessageModelCreate');
-            include 'home_view.php';
         }else{
             $view = new MyHome();
             $this->displayErrors();
-            include 'home_view.php';
         }
+        include 'home_view.php';
     }
 }
 

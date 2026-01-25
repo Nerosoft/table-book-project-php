@@ -9,12 +9,11 @@ class BranchChangePost extends ValidationId{
         if($this->isEmptyErrors()){
             $this->resetId();
             $view = new MyBranch('SuccessfullyChangeBranch');
-            include 'Branch_view.php';
         }else{
             $view = new MyBranch();
             $this->displayErrors();
-            include 'Branch_view.php';
         }  
+        include 'Branch_view.php';
     }
 }
 new BranchChangePost();

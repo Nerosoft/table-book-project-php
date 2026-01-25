@@ -12,12 +12,11 @@ class FlexTablesCreatePost extends MessageError{
         if($this->isEmptyErrors()){
             $this->saveFlexDataBase($this->getRandomId());
             $view = new MyFlexTablesView('MessageModelCreate');
-            include 'FlexTables_view.php';
         }else{
             $view = new MyFlexTablesView();
             $this->displayErrors();
-            include 'FlexTables_view.php';
         }
+        include 'FlexTables_view.php';
     }
 }
 new FlexTablesCreatePost();

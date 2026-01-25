@@ -12,12 +12,11 @@ class SettingUsersEditPost extends ValidationId{
         if($this->isEmptyErrors()){
             $this->saveUsers($_POST['id']);
             $view = new MySettingUsers('MessageModelEdit');
-            include 'SettingUsers_view.php';
         }else{
             $view = new MySettingUsers();
             $this->displayErrors();
-            include 'SettingUsers_view.php';
         }
+        include 'SettingUsers_view.php';
     }
 }
 

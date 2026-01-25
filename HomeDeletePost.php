@@ -17,12 +17,11 @@ class HomeDeletePost extends ValidationId{
                 unset($myData[$_POST['id']]);
             $this->saveModel($myData);
             $view = new MyHome('Delete');
-            include 'home_view.php';
         }else{
             $view = new MyHome();
             $this->displayErrors();
-            include 'home_view.php';
         }
+        include 'home_view.php';
     }
 }
 new HomeDeletePost();

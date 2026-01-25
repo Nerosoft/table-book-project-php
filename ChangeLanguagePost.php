@@ -11,12 +11,11 @@ class ChangeLanguagePost extends ValidationId{
             $myData['Setting']['Language'] = $_POST['id'];
             $this->saveModel($myData);
             $view = new MyChangeLanguage('ChangeLang');
-            include 'ChangeLanguage_view.php';
         }else{
             $view = new MyChangeLanguage();
             $this->displayErrors();
-            include 'ChangeLanguage_view.php';
         }
+        include 'ChangeLanguage_view.php';
     }
 }
 new ChangeLanguagePost();

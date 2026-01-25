@@ -22,12 +22,11 @@ class ChangeLanguageCreatePost extends MessageError{
                 }  
             $this->saveModel($myData);
             $view = new MyChangeLanguage('MessageModelCreate');
-            include 'ChangeLanguage_view.php';
         }else{
             $view = new MyChangeLanguage();
             $this->displayErrors();
-            include 'ChangeLanguage_view.php';
         }
+        include 'ChangeLanguage_view.php';
     }
 }
 

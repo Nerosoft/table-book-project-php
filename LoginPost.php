@@ -12,13 +12,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                     if($value->getName() === $_POST['Email'] && $value->getPassword() === $_POST['Password'])
                         $this->redirectToAdminPage();
                     $view = new MyLogin('EmailPassword', 'danger');
-                    include 'login_view.php';
-
             }else{
                 $view = new MyLogin();
                 $this->displayErrors();
-                include 'login_view.php';
             }
+            include 'login_view.php';
         }
     }
     new LoginPost();

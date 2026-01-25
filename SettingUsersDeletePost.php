@@ -7,19 +7,13 @@ class SettingUsersDeletePost extends ValidationId{
     function __construct(){
         parent::__construct('SettingUsers');
         if($this->isEmptyErrors()){
-            $myData = $this->getObj();
-            if(count($myData['Users']) === 1)
-                unset($myData['Users']);
-            else
-                unset($myData['Users'][$_POST['id']]);
-            $this->saveModel($myData);
+            $this->deleteItem('Users');
             $view = new MySettingUsers('Delete');
-            include 'SettingUsers_view.php';
         }else{
             $view = new MySettingUsers();
             $this->displayErrors();
-            include 'SettingUsers_view.php';
         }
+        include 'SettingUsers_view.php';
     }
 }
 

@@ -132,4 +132,12 @@ class MessageError extends ModelJson{
         foreach ($obj->getallNames() as $key=>$value)
             $myData[$key]['AllNamesLanguage'][$newKey] = $_POST['lang_name'];
     }
+    function deleteItem($id){
+        $myData = $this->getObj();
+        if(count($myData[$id]) === 1)
+            unset($myData[$id]);
+        else
+            unset($myData[$id][$_POST['id']]);
+        $this->saveModel($myData);
+    }
 }

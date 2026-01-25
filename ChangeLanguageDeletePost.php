@@ -16,12 +16,11 @@ class ChangeLanguageDeletePost extends ValidationId{
                     unset($myData[$key]['AllNamesLanguage'][$_POST['id']]);
             $this->saveModel($myData);
             $view = new MyChangeLanguage('Delete');
-            include 'ChangeLanguage_view.php';
         }else{
             $view = new MyChangeLanguage();
             $this->displayErrors();
-            include 'ChangeLanguage_view.php';
         }
+        include 'ChangeLanguage_view.php';
     }
 }
 new ChangeLanguageDeletePost();

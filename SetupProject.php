@@ -16,12 +16,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['setup_project']) && $_
                 $file[$this->getRandomId()] = $this->getProject();
                 $this->saveFile($file);
                 $view = $_POST['setup_project'] === 'Login'?new MyLogin('MessageSetupProject'):new MyRegister('MessageSetupProject');
-                include $_POST['setup_project'] === 'Login'?'login_view.php':'register_view.php';
             }else{
                 $view = $_POST['setup_project'] === 'Login'?new MyLogin():new MyRegister();
                 $this->displayErrors();
-                include $_POST['setup_project'] === 'Login'?'login_view.php':'register_view.php';
             }
+            include $_POST['setup_project'] === 'Login'?'login_view.php':'register_view.php';
         }
         function getProject(){
             return array(

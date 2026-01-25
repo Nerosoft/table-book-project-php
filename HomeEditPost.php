@@ -15,12 +15,11 @@ class HomeEditPost extends ValidationId{
                 $myData[$code]['MyFlexTables'][$_POST['id']] = $_POST['name'];
             $this->saveModel($myData);
             $view = new MyHome('MessageModelEdit');
-            include 'home_view.php';
         }else{
             $view = new MyHome();
             $this->displayErrors();
-            include 'home_view.php';
         }
+        include 'home_view.php';
     }
 }
 new HomeEditPost();

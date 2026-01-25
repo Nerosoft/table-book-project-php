@@ -12,12 +12,11 @@ class FlexTablesEditPost extends ValidationId{
         if($this->isEmptyErrors()){
             $this->saveFlexDataBase($_POST['id']);
             $view = new MyFlexTablesView('MessageModelEdit');
-            include 'FlexTables_view.php';
         }else{
             $view = new MyFlexTablesView();
             $this->displayErrors();
-            include 'FlexTables_view.php';
         }
+        include 'FlexTables_view.php';
     }
 }
 new FlexTablesEditPost();
