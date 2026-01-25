@@ -166,9 +166,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['setup_project']) && $_
                         "MessageModelEdit"=> "Seccessfully edit language",
                         "Delete"=> "Seccessfully delete language-"
                     ],
-                    "AllNamesLanguage"=> [
-                        "english"=> "engilsh"
-                    ],
                     "Register"=> [
                         "MYTITLE"=> "Register",
                         "Title"=> "Register",

@@ -143,9 +143,6 @@
                 "MessageModelEdit": "Seccessfully edit language",
                 "Delete": "Seccessfully delete language-"
             },
-            "AllNamesLanguage": {
-                "english": "engilsh"
-            },
             "Register": {
                 "MYTITLE": "Register",
                 "Title": "Register",
