@@ -25,9 +25,9 @@ class MessageError extends ModelJson{
     }
     function validCustomTable($obj){
         if(!isset($_POST['name']) || $_POST['name'] === '')
-            $obj->setErrors($obj->getNameTableIsReq());
+            $this->setErrors($obj->getNameTableIsReq());
         else if(strlen($_POST['name']) < 3)
-            $obj->setErrors($obj->getNameTableIsInv());
+            $this->setErrors($obj->getNameTableIsInv());
     }
     function ValidBranch($obj){
         if(!isset($_POST['Name']) || $_POST['Name'] === '')
@@ -73,30 +73,30 @@ class MessageError extends ModelJson{
         else if(strlen($_POST['lang_name']) < 3)
             $this->setErrors($obj->getNewLangNameInvalid());
     }
-    function validFlexTable(){
+    function validFlexTable($obj){
         foreach ($this->getErrorsMessageReq() as $key => $value) {
             if(!isset($_POST[$key]) || $_POST[$key] === '')
-                $this->setErrors($this->getErrorsMessageReq()[$key]);
+                $this->setErrors($obj->getErrorsMessageReq()[$key]);
             else if(strlen($_POST[$key]) < 3)
-                $this->setErrors($this->getErrorsMessageInv()[$key]);
+                $this->setErrors($obj->getErrorsMessageInv()[$key]);
         }
     }
-    function validUsers(){
+    function validUsers($obj){
          if(!isset($_POST['Email']) || $_POST['Email'] === '')
-            $this->setErrors($this->getRequiredEmail());
+            $this->setErrors($obj->getRequiredEmail());
         else if(!preg_match('/^[\w]+@[\w]+\.[a-zA-z]{2,6}$/', $_POST['Email']))
-            $this->setErrors($this->getInvalidEmail());
+            $this->setErrors($obj->getInvalidEmail());
         else if(isset($this->getObj()['Users']) && in_array($_POST['Email'], array_map(function($obj) {return $obj['Email'];}, $this->getObj()['Users'])) && $this->getSCRIPTFILENAME() === 'SettingUsersCreatePost' ||
         isset($_POST['id']) && isset($this->getObj()['Users'][$_POST['id']]) && in_array($_POST['Email'], array_map(function($obj) {return $obj['Email'];}, $this->getObj()['Users'])) && $this->getObj()['Users'][$_POST['id']]['Email'] !== $_POST['Email'] && $this->getSCRIPTFILENAME() === 'SettingUsersEditPost' )
             $this->setErrors($this->getModelPage()['EmailExist']);
         if(!isset($_POST['Password']) || $_POST['Password'] === '')
-            $this->setErrors($this->getRequiredPassword());
+            $this->setErrors($obj->getRequiredPassword());
         else if(strlen($_POST['Password']) < 8)
-            $this->setErrors($this->getInvalidPassword());
+            $this->setErrors($obj->getInvalidPassword());
         if(!isset($_POST['Key']) || $_POST['Key'] === '')
-            $this->setErrors($this->getRequiredKeyPassword());
+            $this->setErrors($obj->getRequiredKeyPassword());
         else if(strlen($_POST['Key']) < 8)
-            $this->setErrors($this->getInvalidKeyPassword());
+            $this->setErrors($obj->getInvalidKeyPassword());
     }
     function validStaticId(){
         if(!isset($_POST['superId']) || !isset($this->getFile()[$_POST['superId']]))

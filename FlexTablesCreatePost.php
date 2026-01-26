@@ -8,7 +8,7 @@ class FlexTablesCreatePost extends MessageError{
     function __construct(){
         parent::__construct($_GET['id']);
         $this->initErrorFlexTable($this->getModelPage());
-        $this->validFlexTable();
+        $this->validFlexTable($this);
         if($this->isEmptyErrors()){
             $this->saveFlexDataBase($this->getRandomId());
             $view = new MyFlexTablesView('MessageModelCreate');

@@ -8,7 +8,7 @@ class SettingUsersCreatePost extends MessageError{
     function __construct(){
         parent::__construct('SettingUsers');
         $this->initErrorsPassword($this->getModelPage());
-        $this->validUsers();
+        $this->validUsers($this);
         if($this->isEmptyErrors()){
             $this->saveUsers($this->getRandomId());
             $view = new MySettingUsers('MessageModelCreate');

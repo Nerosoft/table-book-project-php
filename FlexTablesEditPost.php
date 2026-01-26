@@ -8,7 +8,7 @@ class FlexTablesEditPost extends ValidationId{
     function __construct(){
         parent::__construct($_GET['id']);
         $this->initErrorFlexTable($this->getModelPage());
-        $this->validFlexTable();
+        $this->validFlexTable($this);
         if($this->isEmptyErrors()){
             $this->saveFlexDataBase($_POST['id']);
             $view = new MyFlexTablesView('MessageModelEdit');
