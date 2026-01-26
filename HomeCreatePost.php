@@ -11,7 +11,7 @@ class HomeCreatePost extends MessageError{
         $this->validCustomTable($this);
         if(!isset($_POST['input_number']) || $_POST['input_number'] === '')
             $this->setErrors($this->getInputNumberTableIsReq());
-        else if($_POST['input_number'] > 8)
+        else if(!is_numeric($_POST['input_number']) || $_POST['input_number'] > 8)
             $this->setErrors($this->getInputNumberTableIsInv());
         if($this->isEmptyErrors()){
             $key = $this->getRandomId();
